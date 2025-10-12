@@ -1,0 +1,2523 @@
+{
+    "data": {
+        "schedule": {
+            "pages": {
+                "older": "b2xkZXI6OjExNTAxNjIzMTkxMDk2NzA0Mg==",
+                "newer": "bmV3ZXI6OjExMzQ3NTc5ODAwNjY2NDU4OA=="
+            },
+            "events": [
+                {
+                    "startTime": "2025-10-01T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967042",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Forsaken Team",
+                                "code": "FSK",
+                                "image": "http://static.lolesports.com/teams/1702894248711_1500_FSK_MONO.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Unicorns of Love Sexy Edition",
+                                "code": "USE",
+                                "image": "http://static.lolesports.com/teams/1674832383233_PRM_USE-FullColorDarkBG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T09:30:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "LCP",
+                        "slug": "lcp"
+                    },
+                    "match": {
+                        "id": "115218726392632707",
+                        "flags": [
+                            "hasVod",
+                            "isSpoiler"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Inferno Esports",
+                                "code": "IE",
+                                "image": "http://static.lolesports.com/teams/1758702382053_PnR_IE_Full_B.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Deep Cross Gaming",
+                                "code": "DCG",
+                                "image": "http://static.lolesports.com/teams/1644502702164_DeepCrossGaming_W_1.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 0
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967052",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Los Ratones",
+                                "code": "LR",
+                                "image": "http://static.lolesports.com/teams/1736206905390_LR1.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Bushido Wildcats",
+                                "code": "BW",
+                                "image": "http://static.lolesports.com/teams/1737386061384_BushidoWildcats.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967054",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Galions",
+                                "code": "GL",
+                                "image": "http://static.lolesports.com/teams/1734090136444_WHITE_GALIONS_LOGO.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Geekay Esports",
+                                "code": "GK",
+                                "image": "http://static.lolesports.com/teams/1738571465354_GkLogo-Colored2x.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967064",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "StormMedia FMS",
+                                "code": "FMS",
+                                "image": "http://static.lolesports.com/teams/1752041191754_FMS.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Zena Esports",
+                                "code": "ZENA",
+                                "image": "http://static.lolesports.com/teams/1737015447766_ZenaRedlogo-ValerioPietroMarchisotta.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967056",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Barça Esports",
+                                "code": "BAR",
+                                "image": "http://static.lolesports.com/teams/1639828813946_61b778236a9c9995719028.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "GIANTX PRIDE",
+                                "code": "GXP",
+                                "image": "http://static.lolesports.com/teams/1703256688027_658305af80d3b372217018.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967066",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Senshi eSports",
+                                "code": "SNSH",
+                                "image": "http://static.lolesports.com/teams/1737451831210_SNSH_COLOR_LIGHTDARKBG.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Entropiq",
+                                "code": "EIQ",
+                                "image": "http://static.lolesports.com/teams/1642690673730_HM_EIQ_logo_1_1_use_this.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967058",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Misa Esports",
+                                "code": "MISA",
+                                "image": "http://static.lolesports.com/teams/1737386153294_MisaEsports.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Los Heretics",
+                                "code": "HRTS",
+                                "image": "http://static.lolesports.com/teams/1661502137823_LOGOHERETICSPNG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967060",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Gentle Mates",
+                                "code": "M8",
+                                "image": "http://static.lolesports.com/teams/1734359690314_M8_logo_carre_blanc1.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Odivelas Sports Club",
+                                "code": "OSC",
+                                "image": "http://static.lolesports.com/teams/1738418481925_osc.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967068",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Zero Tenacity",
+                                "code": "Z10",
+                                "image": "http://static.lolesports.com/teams/1671446120643_JafqYYq.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "GNG Amazigh",
+                                "code": "GNG",
+                                "image": "http://static.lolesports.com/teams/1738571853483_FullcolorforDarkBG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "Circuito Desafiante",
+                        "slug": "cd"
+                    },
+                    "match": {
+                        "id": "115213639728295062",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Isurus",
+                                "code": "ISG",
+                                "image": "http://static.lolesports.com/teams/1758021026981_LogoColor.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 0
+                                }
+                            },
+                            {
+                                "name": "FLAMENGO Redragon",
+                                "code": "FLA",
+                                "image": "http://static.lolesports.com/teams/1741770712987_LOGOFLAESPORTSCRFVERMELHA.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T17:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967062",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Verdant",
+                                "code": "VER",
+                                "image": "http://static.lolesports.com/teams/1736206402275_VER1.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Otter Side",
+                                "code": "OTS",
+                                "image": "http://static.lolesports.com/teams/1753881580888_OtterSideLogoV2Monocromtico.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T17:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967070",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Veni Vidi Vici",
+                                "code": "VVV",
+                                "image": "http://static.lolesports.com/teams/1736500243640_677fd12b34f73704474019.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Forsaken Team",
+                                "code": "FSK",
+                                "image": "http://static.lolesports.com/teams/1702894248711_1500_FSK_MONO.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T17:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967072",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Karmine Corp Blue",
+                                "code": "KCB",
+                                "image": "http://static.lolesports.com/teams/LFL-KC-logo.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "ULF ESPORTS",
+                                "code": "ULF",
+                                "image": "http://static.lolesports.com/teams/1748868374823_ULF_ESPORTS_OFFICIAL_LOGO_WHITE.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T17:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967074",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Team Phantasma",
+                                "code": "TP",
+                                "image": "http://static.lolesports.com/teams/TeamPhantasma.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            },
+                            {
+                                "name": "TeamOrangeGaming",
+                                "code": "TOG",
+                                "image": "http://static.lolesports.com/teams/1758889281207_TOG.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967044",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Berlin International Gaming",
+                                "code": "BIG",
+                                "image": "http://static.lolesports.com/teams/1674839453682_PRM_BIG-MonochromeLightBG.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 0
+                                }
+                            },
+                            {
+                                "name": "Partizan Sangal",
+                                "code": "PXS",
+                                "image": "http://static.lolesports.com/teams/1744190485577_EBL_PXS-MonochromeDarkBG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967048",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Rossmann Centaurs",
+                                "code": "ROSS",
+                                "image": "http://static.lolesports.com/teams/1734307301367_ROSS.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Vitality.Bee",
+                                "code": "VITB",
+                                "image": "http://static.lolesports.com/teams/1704733356167_VITA.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 0
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967076",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Unicorns of Love Sexy Edition",
+                                "code": "USE",
+                                "image": "http://static.lolesports.com/teams/1674832383233_PRM_USE-FullColorDarkBG.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Colossal Gaming",
+                                "code": "CG",
+                                "image": "http://static.lolesports.com/teams/1742216184064_Logomark-FullcolourfordarkBG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 4
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-02T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967080",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Gamespace MC",
+                                "code": "GSMC",
+                                "image": "http://static.lolesports.com/teams/GameSpaceMediterraneanCollegeeSports.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 4
+                                }
+                            },
+                            {
+                                "name": "eSuba",
+                                "code": "ESB",
+                                "image": "http://static.lolesports.com/teams/1705300013762_HM_ESB_logo.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-03T09:30:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "LCP",
+                        "slug": "lcp"
+                    },
+                    "match": {
+                        "id": "115218726392632713",
+                        "flags": [
+                            "hasVod",
+                            "isSpoiler"
+                        ],
+                        "teams": [
+                            {
+                                "name": "The Chiefs Esports Club",
+                                "code": "CHF",
+                                "image": "http://static.lolesports.com/teams/1733833766423_ChiefsEsportsClub-CHF-Color1.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Deep Cross Gaming",
+                                "code": "DCG",
+                                "image": "http://static.lolesports.com/teams/1644502702164_DeepCrossGaming_W_1.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 0
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-03T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "Circuito Desafiante",
+                        "slug": "cd"
+                    },
+                    "match": {
+                        "id": "115213639728295068",
+                        "flags": [
+                            "hasVod",
+                            "isSpoiler"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Isurus",
+                                "code": "ISG",
+                                "image": "http://static.lolesports.com/teams/1758021026981_LogoColor.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 0
+                                }
+                            },
+                            {
+                                "name": "Alpha7",
+                                "code": "A7",
+                                "image": "http://static.lolesports.com/teams/1752504768051_600px-A7_eSports_darkmode.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-04T09:30:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "LCP",
+                        "slug": "lcp"
+                    },
+                    "match": {
+                        "id": "115218726392632701",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "MGN Vikings Esports",
+                                "code": "MVKE",
+                                "image": "http://static.lolesports.com/teams/1704789745043_1280X1280color.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 0
+                                }
+                            },
+                            {
+                                "name": "Saigon Dino",
+                                "code": "DINO",
+                                "image": "http://static.lolesports.com/teams/1737108816278_SaigonDino-DINOLogo2025.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-04T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "Circuito Desafiante",
+                        "slug": "cd"
+                    },
+                    "match": {
+                        "id": "115213639728295074",
+                        "flags": [
+                            "hasVod",
+                            "isSpoiler"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Farenvehn",
+                                "code": "FVN",
+                                "image": "http://static.lolesports.com/teams/1758021115461_FarenvehnLogo.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "FLAMENGO Redragon",
+                                "code": "FLA",
+                                "image": "http://static.lolesports.com/teams/1741770712987_LOGOFLAESPORTSCRFVERMELHA.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-04T20:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "NACL",
+                        "slug": "nacl"
+                    },
+                    "match": {
+                        "id": "115214006910240376",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Estral Esports",
+                                "code": "EST",
+                                "image": "http://static.lolesports.com/teams/EST.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 0
+                                }
+                            },
+                            {
+                                "name": "Conviction",
+                                "code": "CNV",
+                                "image": "http://static.lolesports.com/teams/1675158238331_Conviction.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-05T16:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "Circuito Desafiante",
+                        "slug": "cd"
+                    },
+                    "match": {
+                        "id": "115213639728295080",
+                        "flags": [
+                            "hasVod",
+                            "isSpoiler"
+                        ],
+                        "teams": [
+                            {
+                                "name": "FLAMENGO Redragon",
+                                "code": "FLA",
+                                "image": "http://static.lolesports.com/teams/1741770712987_LOGOFLAESPORTSCRFVERMELHA.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Alpha7",
+                                "code": "A7",
+                                "image": "http://static.lolesports.com/teams/1752504768051_600px-A7_eSports_darkmode.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-05T20:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "NACL",
+                        "slug": "nacl"
+                    },
+                    "match": {
+                        "id": "115214006911026814",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "SDM Tigres",
+                                "code": "SDM",
+                                "image": "http://static.lolesports.com/teams/1742463079753_FULL_COLOR_FOR_DARK_BG6.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Luminosity Gaming",
+                                "code": "LG",
+                                "image": "http://static.lolesports.com/teams/1742289257527_LG-Eye-Color.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 3
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 0
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T13:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967100",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "StormMedia FMS",
+                                "code": "FMS",
+                                "image": "http://static.lolesports.com/teams/1752041191754_FMS.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Otter Side",
+                                "code": "OTS",
+                                "image": "http://static.lolesports.com/teams/1753881580888_OtterSideLogoV2Monocromtico.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T13:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967102",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "TeamOrangeGaming",
+                                "code": "TOG",
+                                "image": "http://static.lolesports.com/teams/1758889281207_TOG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Barça Esports",
+                                "code": "BAR",
+                                "image": "http://static.lolesports.com/teams/1639828813946_61b778236a9c9995719028.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T13:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967104",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Veni Vidi Vici",
+                                "code": "VVV",
+                                "image": "http://static.lolesports.com/teams/1736500243640_677fd12b34f73704474019.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Galions",
+                                "code": "GL",
+                                "image": "http://static.lolesports.com/teams/1734090136444_WHITE_GALIONS_LOGO.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T14:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967106",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Zero Tenacity",
+                                "code": "Z10",
+                                "image": "http://static.lolesports.com/teams/1671446120643_JafqYYq.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Senshi eSports",
+                                "code": "SNSH",
+                                "image": "http://static.lolesports.com/teams/1737451831210_SNSH_COLOR_LIGHTDARKBG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T14:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967108",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Los Heretics",
+                                "code": "HRTS",
+                                "image": "http://static.lolesports.com/teams/1661502137823_LOGOHERETICSPNG.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Bushido Wildcats",
+                                "code": "BW",
+                                "image": "http://static.lolesports.com/teams/1737386061384_BushidoWildcats.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T14:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967110",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Karmine Corp Blue",
+                                "code": "KCB",
+                                "image": "http://static.lolesports.com/teams/LFL-KC-logo.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Odivelas Sports Club",
+                                "code": "OSC",
+                                "image": "http://static.lolesports.com/teams/1738418481925_osc.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 1
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967084",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Partizan Sangal",
+                                "code": "PXS",
+                                "image": "http://static.lolesports.com/teams/1744190485577_EBL_PXS-MonochromeDarkBG.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Geekay Esports",
+                                "code": "GK",
+                                "image": "http://static.lolesports.com/teams/1738571465354_GkLogo-Colored2x.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163720",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "ULF ESPORTS",
+                                "code": "ULF",
+                                "image": "http://static.lolesports.com/teams/1748868374823_ULF_ESPORTS_OFFICIAL_LOGO_WHITE.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            },
+                            {
+                                "name": "Unicorns of Love Sexy Edition",
+                                "code": "USE",
+                                "image": "http://static.lolesports.com/teams/1674832383233_PRM_USE-FullColorDarkBG.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967088",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Verdant",
+                                "code": "VER",
+                                "image": "http://static.lolesports.com/teams/1736206402275_VER1.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Gentle Mates",
+                                "code": "M8",
+                                "image": "http://static.lolesports.com/teams/1734359690314_M8_logo_carre_blanc1.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T15:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163724",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Zena Esports",
+                                "code": "ZENA",
+                                "image": "http://static.lolesports.com/teams/1737015447766_ZenaRedlogo-ValerioPietroMarchisotta.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            },
+                            {
+                                "name": "Entropiq",
+                                "code": "EIQ",
+                                "image": "http://static.lolesports.com/teams/1642690673730_HM_EIQ_logo_1_1_use_this.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163728",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Team Phantasma",
+                                "code": "TP",
+                                "image": "http://static.lolesports.com/teams/TeamPhantasma.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            },
+                            {
+                                "name": "GNG Amazigh",
+                                "code": "GNG",
+                                "image": "http://static.lolesports.com/teams/1738571853483_FullcolorforDarkBG.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967092",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Rossmann Centaurs",
+                                "code": "ROSS",
+                                "image": "http://static.lolesports.com/teams/1734307301367_ROSS.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "GIANTX PRIDE",
+                                "code": "GXP",
+                                "image": "http://static.lolesports.com/teams/1703256688027_658305af80d3b372217018.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231910967096",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Misa Esports",
+                                "code": "MISA",
+                                "image": "http://static.lolesports.com/teams/1737386153294_MisaEsports.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 4,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Los Ratones",
+                                "code": "LR",
+                                "image": "http://static.lolesports.com/teams/1736206905390_LR1.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-06T18:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163732",
+                        "flags": [
+                            "hasVod"
+                        ],
+                        "teams": [
+                            {
+                                "name": "eSuba",
+                                "code": "ESB",
+                                "image": "http://static.lolesports.com/teams/1705300013762_HM_ESB_logo.png",
+                                "result": {
+                                    "outcome": "loss",
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 4
+                                }
+                            },
+                            {
+                                "name": "Forsaken Team",
+                                "code": "FSK",
+                                "image": "http://static.lolesports.com/teams/1702894248711_1500_FSK_MONO.png",
+                                "result": {
+                                    "outcome": "win",
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T13:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163736",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Los Heretics",
+                                "code": "HRTS",
+                                "image": "http://static.lolesports.com/teams/1661502137823_LOGOHERETICSPNG.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Barça Esports",
+                                "code": "BAR",
+                                "image": "http://static.lolesports.com/teams/1639828813946_61b778236a9c9995719028.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T13:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163756",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "GNG Amazigh",
+                                "code": "GNG",
+                                "image": "http://static.lolesports.com/teams/1738571853483_FullcolorforDarkBG.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "TeamOrangeGaming",
+                                "code": "TOG",
+                                "image": "http://static.lolesports.com/teams/1758889281207_TOG.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T13:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163740",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Karmine Corp Blue",
+                                "code": "KCB",
+                                "image": "http://static.lolesports.com/teams/LFL-KC-logo.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Partizan Sangal",
+                                "code": "PXS",
+                                "image": "http://static.lolesports.com/teams/1744190485577_EBL_PXS-MonochromeDarkBG.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T13:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163760",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Odivelas Sports Club",
+                                "code": "OSC",
+                                "image": "http://static.lolesports.com/teams/1738418481925_osc.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Forsaken Team",
+                                "code": "FSK",
+                                "image": "http://static.lolesports.com/teams/1702894248711_1500_FSK_MONO.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T16:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163772",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Bushido Wildcats",
+                                "code": "BW",
+                                "image": "http://static.lolesports.com/teams/1737386061384_BushidoWildcats.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Entropiq",
+                                "code": "EIQ",
+                                "image": "http://static.lolesports.com/teams/1642690673730_HM_EIQ_logo_1_1_use_this.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T16:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163752",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Zero Tenacity",
+                                "code": "Z10",
+                                "image": "http://static.lolesports.com/teams/1671446120643_JafqYYq.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Rossmann Centaurs",
+                                "code": "ROSS",
+                                "image": "http://static.lolesports.com/teams/1734307301367_ROSS.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T16:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163744",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Gentle Mates",
+                                "code": "M8",
+                                "image": "http://static.lolesports.com/teams/1734359690314_M8_logo_carre_blanc1.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "StormMedia FMS",
+                                "code": "FMS",
+                                "image": "http://static.lolesports.com/teams/1752041191754_FMS.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T19:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163764",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Otter Side",
+                                "code": "OTS",
+                                "image": "http://static.lolesports.com/teams/1753881580888_OtterSideLogoV2Monocromtico.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Veni Vidi Vici",
+                                "code": "VVV",
+                                "image": "http://static.lolesports.com/teams/1736500243640_677fd12b34f73704474019.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T19:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163768",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Unicorns of Love Sexy Edition",
+                                "code": "USE",
+                                "image": "http://static.lolesports.com/teams/1674832383233_PRM_USE-FullColorDarkBG.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            },
+                            {
+                                "name": "Senshi eSports",
+                                "code": "SNSH",
+                                "image": "http://static.lolesports.com/teams/1737451831210_SNSH_COLOR_LIGHTDARKBG.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 3
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T19:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163748",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Los Ratones",
+                                "code": "LR",
+                                "image": "http://static.lolesports.com/teams/1736206905390_LR1.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            },
+                            {
+                                "name": "Galions",
+                                "code": "GL",
+                                "image": "http://static.lolesports.com/teams/1734090136444_WHITE_GALIONS_LOGO.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 3,
+                                    "losses": 2
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-07T20:00:00Z",
+                    "state": "completed",
+                    "type": "match",
+                    "blockName": "Promotion",
+                    "league": {
+                        "name": "NACL",
+                        "slug": "nacl"
+                    },
+                    "match": {
+                        "id": "115214006911026820",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "Disguised",
+                                "code": "DSG",
+                                "image": "http://static.lolesports.com/teams/1731496922454_Disguised-Wordmark-Yellow-Main.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 2
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 0
+                                }
+                            },
+                            {
+                                "name": "Estral Esports",
+                                "code": "EST",
+                                "image": "http://static.lolesports.com/teams/EST.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 1
+                                },
+                                "record": {
+                                    "wins": 1,
+                                    "losses": 0
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-08T16:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Finals",
+                    "league": {
+                        "name": "Circuito Desafiante",
+                        "slug": "cd"
+                    },
+                    "match": {
+                        "id": "115213639728295086",
+                        "flags": [
+                            "isSpoiler"
+                        ],
+                        "teams": [
+                            {
+                                "name": "Alpha7",
+                                "code": "A7",
+                                "image": "http://static.lolesports.com/teams/1752504768051_600px-A7_eSports_darkmode.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 1
+                                }
+                            },
+                            {
+                                "name": "Isurus",
+                                "code": "ISG",
+                                "image": "http://static.lolesports.com/teams/1758021026981_LogoColor.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 2,
+                                    "losses": 0
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                },
+                {
+                    "startTime": "2025-10-14T08:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Play In Knockouts",
+                    "league": {
+                        "name": "Worlds",
+                        "slug": "worlds"
+                    },
+                    "match": {
+                        "id": "113475493522079909",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "T1",
+                                "code": "T1",
+                                "image": "http://static.lolesports.com/teams/1726801573959_539px-T1_2019_full_allmode.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 0
+                                }
+                            },
+                            {
+                                "name": "Invictus Gaming",
+                                "code": "IG",
+                                "image": "http://static.lolesports.com/teams/1634762917340_300px-Invictus_Gaming_logo.png",
+                                "result": {
+                                    "outcome": null,
+                                    "gameWins": 0
+                                },
+                                "record": {
+                                    "wins": 0,
+                                    "losses": 0
+                                }
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 5
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

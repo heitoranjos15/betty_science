@@ -1,0 +1,309 @@
+{
+    "data": {
+        "event": {
+            "id": "113503500599535522",
+            "type": "match",
+            "tournament": {
+                "id": "113503357263583149"
+            },
+            "league": {
+                "id": "98767991310872058",
+                "slug": "lck",
+                "image": "http://static.lolesports.com/leagues/lck-color-on-black.png",
+                "name": "LCK"
+            },
+            "match": {
+                "strategy": {
+                    "count": 5
+                },
+                "teams": [
+                    {
+                        "id": "99566404579461230",
+                        "name": "kt Rolster",
+                        "code": "KT",
+                        "image": "http://static.lolesports.com/teams/kt_darkbackground.png",
+                        "result": {
+                            "gameWins": 3
+                        }
+                    },
+                    {
+                        "id": "100725845022060229",
+                        "name": "BNK FEARX",
+                        "code": "BFX",
+                        "image": "http://static.lolesports.com/teams/1734691810721_BFXfullcolorfordarkbg.png",
+                        "result": {
+                            "gameWins": 1
+                        }
+                    }
+                ],
+                "games": [
+                    {
+                        "number": 1,
+                        "id": "113503500599535523",
+                        "state": "completed",
+                        "teams": [
+                            {
+                                "id": "99566404579461230",
+                                "side": "blue"
+                            },
+                            {
+                                "id": "100725845022060229",
+                                "side": "red"
+                            }
+                        ],
+                        "vods": [
+                            {
+                                "id": "115185576412707833",
+                                "parameter": "JPdkdoJcDyU",
+                                "locale": "en-US",
+                                "mediaLocale": {
+                                    "locale": "en-US",
+                                    "englishName": "English (North America)",
+                                    "translatedName": "English (North America)"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:20:06.329Z",
+                                "startMillis": 2760000,
+                                "endMillis": 4980000
+                            },
+                            {
+                                "id": "115190886357194725",
+                                "parameter": "vNdnlQm8Ba4",
+                                "locale": "fr-FR",
+                                "mediaLocale": {
+                                    "locale": "fr-FR",
+                                    "englishName": "French (France)",
+                                    "translatedName": "Français"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T08:12:29.577Z",
+                                "startMillis": 898000,
+                                "endMillis": 3118000
+                            },
+                            {
+                                "id": "115185586072746372",
+                                "parameter": "171650441",
+                                "locale": "ko-KR",
+                                "mediaLocale": {
+                                    "locale": "ko-KR",
+                                    "englishName": "Korean (Korea)",
+                                    "translatedName": "한국어"
+                                },
+                                "provider": "afreecatv",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:30:06.081Z",
+                                "startMillis": 2100000,
+                                "endMillis": 4320000
+                            }
+                        ]
+                    },
+                    {
+                        "number": 2,
+                        "id": "113503500599535524",
+                        "state": "completed",
+                        "teams": [
+                            {
+                                "id": "99566404579461230",
+                                "side": "blue"
+                            },
+                            {
+                                "id": "100725845022060229",
+                                "side": "red"
+                            }
+                        ],
+                        "vods": [
+                            {
+                                "id": "115185576415754627",
+                                "parameter": "JPdkdoJcDyU",
+                                "locale": "en-US",
+                                "mediaLocale": {
+                                    "locale": "en-US",
+                                    "englishName": "English (North America)",
+                                    "translatedName": "English (North America)"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:20:06.329Z",
+                                "startMillis": 6000000,
+                                "endMillis": 7860000
+                            },
+                            {
+                                "id": "115190886341990372",
+                                "parameter": "vNdnlQm8Ba4",
+                                "locale": "fr-FR",
+                                "mediaLocale": {
+                                    "locale": "fr-FR",
+                                    "englishName": "French (France)",
+                                    "translatedName": "Français"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T08:12:29.577Z",
+                                "startMillis": 3626000,
+                                "endMillis": 5486000
+                            },
+                            {
+                                "id": "115185588120760031",
+                                "parameter": "171650441",
+                                "locale": "ko-KR",
+                                "mediaLocale": {
+                                    "locale": "ko-KR",
+                                    "englishName": "Korean (Korea)",
+                                    "translatedName": "한국어"
+                                },
+                                "provider": "afreecatv",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:30:06.081Z",
+                                "startMillis": 5400000,
+                                "endMillis": 7260000
+                            }
+                        ]
+                    },
+                    {
+                        "number": 3,
+                        "id": "113503500599535525",
+                        "state": "completed",
+                        "teams": [
+                            {
+                                "id": "100725845022060229",
+                                "side": "blue"
+                            },
+                            {
+                                "id": "99566404579461230",
+                                "side": "red"
+                            }
+                        ],
+                        "vods": [
+                            {
+                                "id": "115185576413854082",
+                                "parameter": "JPdkdoJcDyU",
+                                "locale": "en-US",
+                                "mediaLocale": {
+                                    "locale": "en-US",
+                                    "englishName": "English (North America)",
+                                    "translatedName": "English (North America)"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:20:06.329Z",
+                                "startMillis": 8940000,
+                                "endMillis": 11160000
+                            },
+                            {
+                                "id": "115190886353894454",
+                                "parameter": "vNdnlQm8Ba4",
+                                "locale": "fr-FR",
+                                "mediaLocale": {
+                                    "locale": "fr-FR",
+                                    "englishName": "French (France)",
+                                    "translatedName": "Français"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T08:12:29.577Z",
+                                "startMillis": 6099000,
+                                "endMillis": 8319000
+                            },
+                            {
+                                "id": "115185586081168378",
+                                "parameter": "171650441",
+                                "locale": "ko-KR",
+                                "mediaLocale": {
+                                    "locale": "ko-KR",
+                                    "englishName": "Korean (Korea)",
+                                    "translatedName": "한국어"
+                                },
+                                "provider": "afreecatv",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:30:06.081Z",
+                                "startMillis": 8280000,
+                                "endMillis": 10500000
+                            }
+                        ]
+                    },
+                    {
+                        "number": 4,
+                        "id": "113503500599535526",
+                        "state": "completed",
+                        "teams": [
+                            {
+                                "id": "100725845022060229",
+                                "side": "blue"
+                            },
+                            {
+                                "id": "99566404579461230",
+                                "side": "red"
+                            }
+                        ],
+                        "vods": [
+                            {
+                                "id": "115185576413329793",
+                                "parameter": "JPdkdoJcDyU",
+                                "locale": "en-US",
+                                "mediaLocale": {
+                                    "locale": "en-US",
+                                    "englishName": "English (North America)",
+                                    "translatedName": "English (North America)"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:20:06.329Z",
+                                "startMillis": 12120000,
+                                "endMillis": 14640000
+                            },
+                            {
+                                "id": "115190886345146013",
+                                "parameter": "vNdnlQm8Ba4",
+                                "locale": "fr-FR",
+                                "mediaLocale": {
+                                    "locale": "fr-FR",
+                                    "englishName": "French (France)",
+                                    "translatedName": "Français"
+                                },
+                                "provider": "youtube",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T08:12:29.577Z",
+                                "startMillis": 8908000,
+                                "endMillis": 11428000
+                            },
+                            {
+                                "id": "115185586089192086",
+                                "parameter": "171650441",
+                                "locale": "ko-KR",
+                                "mediaLocale": {
+                                    "locale": "ko-KR",
+                                    "englishName": "Korean (Korea)",
+                                    "translatedName": "한국어"
+                                },
+                                "provider": "afreecatv",
+                                "offset": 0,
+                                "firstFrameTime": "2025-09-11T07:30:06.081Z",
+                                "startMillis": 11580000,
+                                "endMillis": 14100000
+                            }
+                        ]
+                    },
+                    {
+                        "number": 5,
+                        "id": "113503500599535527",
+                        "state": "unneeded",
+                        "teams": [
+                            {
+                                "id": "100725845022060229",
+                                "side": "blue"
+                            },
+                            {
+                                "id": "99566404579461230",
+                                "side": "red"
+                            }
+                        ],
+                        "vods": []
+                    }
+                ]
+            },
+            "streams": []
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{
+    "data": {
+        "schedule": {
+            "pages": {
+                "older": "b2xkZXI6OjExNTAxNjIzMTkxMDk2NzA0Mg==",
+                "newer": "bmV3ZXI6OjExMzQ3NTc5ODAwNjY2NDU4OA=="
+            },
+            "events": [
+                {
+                    "startTime": "2025-10-08T15:00:00Z",
+                    "state": "unstarted",
+                    "type": "match",
+                    "blockName": "Swiss",
+                    "league": {
+                        "name": "EMEA Masters",
+                        "slug": "emea_masters"
+                    },
+                    "match": {
+                        "id": "115016231911163776",
+                        "flags": [],
+                        "teams": [
+                            {
+                                "name": "TBD",
+                                "code": "TBD",
+                                "image": "https://static.lolesports.com/teams/team-tbd.png",
+                                "result": null,
+                                "record": null
+                            },
+                            {
+                                "name": "TBD",
+                                "code": "TBD",
+                                "image": "https://static.lolesports.com/teams/team-tbd.png",
+                                "result": null,
+                                "record": null
+                            }
+                        ],
+                        "strategy": {
+                            "type": "bestOf",
+                            "count": 3
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
