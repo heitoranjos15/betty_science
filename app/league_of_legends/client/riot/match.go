@@ -10,7 +10,6 @@ import (
 
 type clientMatch struct {
 	api api
-	// Logger:      log.New(os.Stdout, "[lol_api] ", log.LstdFlags),
 }
 
 func NewClientMatch(api api) *clientMatch {

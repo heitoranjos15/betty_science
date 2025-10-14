@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"log"
+	"os"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -15,14 +16,53 @@ import (
 )
 
 func main() {
+	args := os.Args
+	if len(args) < 2 {
+		log.Fatalln("Usage: riot <command>\nCommands:\n  next-match\n  load-frames")
+		panic("Not enough arguments")
+	}
+
 	cfg := config.LoadConfig()
-	api := integrations.NewLeagueOfLegendsAPI(cfg.RiotAPIKey)
-	client := riot.NewClientMatch(api)
-
 	db := initMongoDB(cfg.MongoURI, cfg.MongoDB)
-	matchRepository := repo.NewMongoRepo("matches", db)
-	teamRepository := repo.NewMongoRepo("teams", db)
 
+	bot := Bot{
+		Name:  "Riot Bot",
+		cfg:   cfg,
+		mongo: db,
+	}
+
+	commands := map[string][]func(){
+		"next_match": {bot.nextMatchBot, bot.loadGamesBot},
+		// "load_frames": {bot.loadFramesBot},
+	}
+
+	cmd := args[1]
+	if len(cmd) > 4 && cmd[:4] == "CMD=" {
+		cmd = cmd[4:]
+	}
+	cmdFunc, exists := commands[cmd]
+	if !exists {
+		log.Fatalf("Unknown command: %s\n", args[1])
+		panic("Unknown command")
+	}
+
+	for _, cfunc := range cmdFunc {
+		cfunc()
+	}
+
+}
+
+type Bot struct {
+	Name  string
+	cfg   *config.Config
+	mongo *mongo.Database
+}
+
+func (b Bot) nextMatchBot() {
+	api := integrations.NewLeagueOfLegendsAPI(b.cfg.RiotAPIKey)
+	client := riot.NewClientMatch(api)
+	matchRepository := repo.NewMongoRepo("matches", b.mongo)
+	teamRepository := repo.NewMongoRepo("teams", b.mongo)
 	coreMatch := core.NewMatchCore(client, matchRepository, teamRepository)
 	err := coreMatch.Load()
 	if err != nil {
@@ -30,6 +70,32 @@ func main() {
 		panic(err)
 	}
 }
+
+func (b Bot) loadGamesBot() {
+	api := integrations.NewLeagueOfLegendsAPI(b.cfg.RiotAPIKey)
+	client := riot.NewClientGame(api)
+	gameRepository := repo.NewMongoRepo("games", b.mongo)
+	teamRepository := repo.NewMongoRepo("teams", b.mongo)
+	matchRepository := repo.NewMongoRepo("matches", b.mongo)
+	coreGame := core.NewGameCore(b.cfg, client, gameRepository, teamRepository, matchRepository)
+	err := coreGame.Load()
+	if err != nil {
+		log.Fatal(err)
+		panic(err)
+	}
+}
+
+// func (b Bot) loadFramesBot() {
+// 	api := integrations.NewLeagueOfLegendsAPI(b.cfg.RiotAPIKey)
+// 	client := riot.NewTeamFramesClient(api)
+// 	gameRepository := repo.NewMongoRepo("games", b.mongo)
+// 	coreFrame := core.NewTeamFrameCore(client, gameRepository)
+// 	err := coreFrame.Load()
+// 	if err != nil {
+// 		log.Fatal(err)
+// 		panic(err)
+// 	}
+// }
 
 func initMongoDB(uri, dbName string) *mongo.Database {
 	// monitor := &event.CommandMonitor{

@@ -6,6 +6,7 @@ import (
 
 type Config struct {
 	RiotAPIKey string `mapstructure:"RIOT_API_KEY"`
+	RiotSleep  int    `mapstructure:"RIOT_SLEEP"`
 	MongoURI   string `mapstructure:"MONGO_URI"`
 	MongoDB    string `mapstructure:"MONGO_DB_NAME"`
 }
@@ -19,6 +20,7 @@ func LoadConfig() *Config {
 
 	return &Config{
 		RiotAPIKey: viper.GetString("RIOT_API_KEY"),
+		RiotSleep:  viper.GetInt("RIOT_SLEEP"),
 		MongoURI:   viper.GetString("MONGO_URI"),
 		MongoDB:    viper.GetString("MONGO_DB_NAME"),
 	}

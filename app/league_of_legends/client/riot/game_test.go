@@ -136,6 +136,7 @@ func TestLoadGame(t *testing.T) {
 				return
 			}
 			assert.Equal(t, len(tt.expected), len(games), "Expected number of games does not match")
+			assert.Equal(t, tt.expected, games, "Expected game data does not match")
 			mockClient.AssertExpectations(t)
 		})
 	}

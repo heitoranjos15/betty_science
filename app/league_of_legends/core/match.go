@@ -27,7 +27,7 @@ func NewMatchCore(client matchClient, db matchDB, teamDB teamDB) *MatchCore {
 	}
 }
 
-func (ec *MatchCore) Load(_ any) error {
+func (ec *MatchCore) Load() error {
 	ctx := context.Background()
 	data, err := ec.client.LoadData(nil)
 	if err != nil {
@@ -42,8 +42,10 @@ func (ec *MatchCore) Load(_ any) error {
 		if err := ec.saveTeamTournament(ctx, tt.Team, tt.TournamentName); err != nil {
 			log.Println("[core-match] couldnt save team tournament", err)
 		}
-
 	}
+
+	log.Printf("[core-match] loaded %d matches", len(data.Match))
+	log.Printf("[core-match] loaded %d team-tournament associations", len(data.TeamsTournaments))
 
 	return nil
 }

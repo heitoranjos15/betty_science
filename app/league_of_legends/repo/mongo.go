@@ -39,6 +39,18 @@ func (r *MongoRepo) SaveBulkMatches(ctx context.Context, matches []models.Match)
 	return nil
 }
 
+func (r *MongoRepo) GetMatches(ctx context.Context, filter bson.M) ([]models.Match, error) {
+	var matches []models.Match
+	cursor, err := r.collection.Find(ctx, filter)
+	if err != nil {
+		return nil, err
+	}
+	if err := cursor.All(ctx, &matches); err != nil {
+		return nil, err
+	}
+	return matches, nil
+}
+
 func (r *MongoRepo) UpdateTeamTournaments(ctx context.Context, id primitive.ObjectID, tournament string) error {
 	filter := primitive.M{"_id": id}
 	update := primitive.M{"$push": primitive.M{"tournaments": tournament}}
@@ -68,4 +80,35 @@ func (r *MongoRepo) UpdateTeamExternalID(ctx context.Context, id primitive.Objec
 	update := primitive.M{"$set": primitive.M{"external_id": externalID}}
 	_, err := r.collection.UpdateOne(ctx, filter, update)
 	return err
+}
+
+func (r *MongoRepo) SaveBulkGames(ctx context.Context, games []models.Game) error {
+	var models []mongo.WriteModel
+
+	for _, game := range games {
+		filter := bson.M{"external_id": game.ExternalID}
+		update := bson.M{"$set": game}
+		model := mongo.NewUpdateOneModel().
+			SetFilter(filter).
+			SetUpdate(update).
+			SetUpsert(true)
+		models = append(models, model)
+	}
+	_, err := r.collection.BulkWrite(ctx, models)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *MongoRepo) GetGames(ctx context.Context, filter bson.M) ([]models.Game, error) {
+	var games []models.Game
+	cursor, err := r.collection.Find(ctx, filter)
+	if err != nil {
+		return nil, err
+	}
+	if err := cursor.All(ctx, &games); err != nil {
+		return nil, err
+	}
+	return games, nil
 }

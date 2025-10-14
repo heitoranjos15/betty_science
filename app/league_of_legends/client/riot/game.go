@@ -29,6 +29,11 @@ func (c *gameClient) LoadData(match models.Match) ([]models.Game, error) {
 		}
 		game := c.game(details, data.Data.Event.Match.Teams)
 		game.MatchID = match.ID
+
+		if details.Number == 1 {
+			game.StartTime = match.StartTime
+		}
+
 		response = append(response, game)
 	}
 
@@ -39,7 +44,7 @@ func (c *gameClient) game(data GamesDetails, teamDetails []GameDetailsTeam) mode
 	game := models.Game{
 		ExternalID: data.ID,
 		Number:     data.Number,
-		State:      "unloaded",
+		State:      data.State,
 	}
 
 	for _, details := range teamDetails {

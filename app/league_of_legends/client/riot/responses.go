@@ -91,3 +91,98 @@ type GameDetailsTeam struct {
 		GameWins int `json:"gameWins"`
 	} `json:"result"`
 }
+
+type FramesResponse struct {
+	EsportsGameID  string       `json:"esportsGameId"`
+	EsportsMatchID string       `json:"esportsMatchId"`
+	GameMetadata   GameMetadata `json:"gameMetadata"`
+	Frames         []GameFrame  `json:"frames"`
+}
+
+type GameMetadata struct {
+	PatchVersion     string       `json:"patchVersion"`
+	BlueTeamMetadata TeamMetadata `json:"blueTeamMetadata"`
+	RedTeamMetadata  TeamMetadata `json:"redTeamMetadata"`
+}
+
+type TeamMetadata struct {
+	EsportsTeamID       string            `json:"esportsTeamId"`
+	ParticipantMetadata []ParticipantMeta `json:"participantMetadata"`
+}
+
+type ParticipantMeta struct {
+	ParticipantID   int    `json:"participantId"`
+	EsportsPlayerID string `json:"esportsPlayerId"`
+	SummonerName    string `json:"summonerName"`
+	ChampionID      string `json:"championId"`
+	Role            string `json:"role"`
+}
+
+type GameFrame struct {
+	Rfc460Timestamp string    `json:"rfc460Timestamp"`
+	GameState       string    `json:"gameState"`
+	BlueTeam        TeamFrame `json:"blueTeam"`
+	RedTeam         TeamFrame `json:"redTeam"`
+}
+
+type TeamFrame struct {
+	TotalGold    int           `json:"totalGold"`
+	Inhibitors   int           `json:"inhibitors"`
+	Towers       int           `json:"towers"`
+	Barons       int           `json:"barons"`
+	TotalKills   int           `json:"totalKills"`
+	Dragons      []string      `json:"dragons"`
+	Participants []Participant `json:"participants"`
+}
+
+type Participant struct {
+	ParticipantID int `json:"participantId"`
+	TotalGold     int `json:"totalGold"`
+	Level         int `json:"level"`
+	Kills         int `json:"kills"`
+	Deaths        int `json:"deaths"`
+	Assists       int `json:"assists"`
+	CreepScore    int `json:"creepScore"`
+	CurrentHealth int `json:"currentHealth"`
+	MaxHealth     int `json:"maxHealth"`
+}
+
+type PlayerFramesResponse struct {
+	Frames []ParticipantFrame `json:"frames"`
+}
+
+type ParticipantFrame struct {
+	Rfc460Timestamp string                `json:"rfc460Timestamp"`
+	Participants    []ParticipantSnapshot `json:"participants"`
+}
+
+type ParticipantSnapshot struct {
+	ParticipantID       int          `json:"participantId"`
+	Level               int          `json:"level"`
+	Kills               int          `json:"kills"`
+	Deaths              int          `json:"deaths"`
+	Assists             int          `json:"assists"`
+	TotalGoldEarned     int          `json:"totalGoldEarned"`
+	CreepScore          int          `json:"creepScore"`
+	KillParticipation   float64      `json:"killParticipation"`
+	ChampionDamageShare float64      `json:"championDamageShare"`
+	WardsPlaced         int          `json:"wardsPlaced"`
+	WardsDestroyed      int          `json:"wardsDestroyed"`
+	AttackDamage        int          `json:"attackDamage"`
+	AbilityPower        int          `json:"abilityPower"`
+	CriticalChance      float64      `json:"criticalChance"`
+	AttackSpeed         int          `json:"attackSpeed"`
+	LifeSteal           int          `json:"lifeSteal"`
+	Armor               int          `json:"armor"`
+	MagicResistance     int          `json:"magicResistance"`
+	Tenacity            float64      `json:"tenacity"`
+	Items               []int        `json:"items"`
+	PerkMetadata        PerkMetadata `json:"perkMetadata"`
+	Abilities           []string     `json:"abilities"`
+}
+
+type PerkMetadata struct {
+	StyleID    int   `json:"styleId"`
+	SubStyleID int   `json:"subStyleId"`
+	Perks      []int `json:"perks"`
+}

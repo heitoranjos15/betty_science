@@ -93,78 +93,79 @@ func (t LolMatchStartTime) ToString() string {
 	return t.formatSeconds().Format(time.RFC3339) + "Z"
 }
 
-func (api *LeagueOfLegendsClient) GetLiveFrame(gameID string, startingTime LolMatchStartTime) (map[string]interface{}, error) {
-	url := fmt.Sprintf("%s/livestats/v1/window/%s?startingTime=%s", api.GameLiveURL, gameID, startingTime.ToString())
+func (api *LeagueOfLegendsClient) GetFrames(gameID string, startingTime time.Time) (riot.FramesResponse, error) {
+	fmtStartTime := LolMatchStartTime(startingTime)
+	var result riot.FramesResponse
+
+	url := fmt.Sprintf("%s/livestats/v1/window/%s?startingTime=%s", api.GameLiveURL, gameID, fmtStartTime.ToString())
 	body, status, err := api.get(url)
 	if err != nil {
-		return nil, err
+		return result, err
 	}
+
 	if status == 200 {
-		var result map[string]interface{}
 		if err := json.Unmarshal(body, &result); err != nil {
-			return nil, err
+			return result, err
 		}
 		return result, nil
 	}
+
 	if status == 204 {
-		return nil, errors.New("game is not live or no data available yet")
+		return result, errors.New("game has no data (possibly not live yet)")
 	}
-	return nil, fmt.Errorf("error fetching game data: %d - %s", status, string(body))
+
+	return result, fmt.Errorf("error fetching game data: %d - %s", status, string(body))
 }
 
-func (api *LeagueOfLegendsClient) GetFirstFrame(gameID string, matchStartTime LolMatchStartTime) (map[string]interface{}, error) {
+func (api *LeagueOfLegendsClient) GetFirstFrame(gameID string, startTime time.Time) (riot.GameFrame, error) {
+	fmtStartTime := LolMatchStartTime(startTime)
+
 	retryCount := 0
 	retryLimit := 150
 
 	for {
 		if retryCount >= retryLimit {
-			return nil, errors.New("exceeded maximum retries to fetch first frame")
+			return riot.GameFrame{}, errors.New("exceeded maximum retries to fetch first frame")
 		}
 
-		frameData, err := api.GetLiveFrame(gameID, matchStartTime)
+		frameData, err := api.GetFrames(gameID, startTime)
 		if err != nil {
-			return nil, err
+			return riot.GameFrame{}, err
 		}
 
-		if frameData != nil {
-			if frames, ok := frameData["frames"].([]interface{}); ok && len(frames) > 0 {
-				firstFrame, ok := frames[0].(map[string]interface{})
-				if ok && api.isFirstFrame(firstFrame) {
-					return firstFrame, nil
-				}
+		for _, frame := range frameData.Frames {
+			if api.isFirstFrame(frame) {
+				return frame, nil
 			}
-
-			matchStartTime = LolMatchStartTime(matchStartTime.formatSeconds().Add(5 * time.Minute))
-			time.Sleep(2 * time.Second)
-			retryCount++
 		}
+
+		startTime = time.Time(fmtStartTime.formatSeconds()).Add(5 * time.Minute)
+
+		time.Sleep(2 * time.Second)
+		retryCount++
 	}
 }
 
-func (api *LeagueOfLegendsClient) GetPlayerFrame(gameID string, startTime LolMatchStartTime) (map[string]interface{}, error) {
-	body, status, err := api.get(fmt.Sprintf("%s/livestats/v1/details/%s?startingTime=%s", api.GameLiveURL, gameID, startTime.ToString()))
+func (api *LeagueOfLegendsClient) GetPlayerFrames(gameID string, time time.Time) (riot.PlayerFramesResponse, error) {
+	fmtStartTime := LolMatchStartTime(time)
+	var result riot.PlayerFramesResponse
+	body, status, err := api.get(fmt.Sprintf("%s/livestats/v1/details/%s?startingTime=%s", api.GameLiveURL, gameID, fmtStartTime.ToString()))
 	if err != nil {
-		return nil, err
+		return result, err
 	}
 	if status == 200 {
-		var result map[string]interface{}
 		if err := json.Unmarshal(body, &result); err != nil {
-			return nil, err
+			return result, err
 		}
 		return result, nil
 	}
 	if status == 204 {
-		return nil, errors.New("no player stats found for game (possibly not live yet)")
+		return result, errors.New("no player stats found for game (possibly not live yet)")
 	}
-	return nil, fmt.Errorf("error fetching player stats: %d - %s", status, string(body))
+	return result, fmt.Errorf("error fetching player stats: %d - %s", status, string(body))
 }
 
-func (api *LeagueOfLegendsClient) isFirstFrame(frame map[string]interface{}) bool {
-	if frame == nil {
-		return false
-	}
-	if _, ok := frame["totalGoldEarned"].(float64); ok {
-		return true
-	}
-	return false
+// TODO move this to riot.GameFrame
+func (api *LeagueOfLegendsClient) isFirstFrame(frame riot.GameFrame) bool {
+	return frame.RedTeam.TotalGold > 0 && frame.BlueTeam.TotalGold > 0
 }

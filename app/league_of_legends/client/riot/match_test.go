@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
@@ -29,6 +30,18 @@ func (m *MockClient) GetGameDetails(matchID string) (client.GameDetailsResponse,
 	args := m.Called(matchID)
 
 	return args.Get(0).(client.GameDetailsResponse), args.Error(1)
+}
+
+func (m *MockClient) GetFrames(gameID string, startingTime time.Time) (client.FramesResponse, error) {
+	args := m.Called(gameID)
+
+	return args.Get(0).(client.FramesResponse), args.Error(1)
+}
+
+func (m *MockClient) GetPlayerFrames(gameID string, startingTime time.Time) (client.PlayerFramesResponse, error) {
+	args := m.Called(gameID)
+
+	return args.Get(0).(client.PlayerFramesResponse), args.Error(1)
 }
 
 func loadMockData(path string) client.ScheduleResponse {

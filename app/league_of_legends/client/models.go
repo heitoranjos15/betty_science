@@ -14,7 +14,14 @@ type MatchResponse struct {
 	TeamsTournaments []TeamTournament
 }
 
-type GameResponse struct {
-	Teams []models.Team
-	Games []models.Game
+type playerFrame struct {
+	Name       string
+	Team       string
+	ExternalID string
+	Role       string
+}
+
+type FrameResponse struct {
+	Frame              models.Frame
+	PlayerGamesDetails []models.GamePlayer
 }

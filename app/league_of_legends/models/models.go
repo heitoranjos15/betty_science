@@ -17,7 +17,7 @@ type Match struct {
 }
 
 type Team struct {
-	ID          primitive.ObjectID `bson:"id,omitempty" json:"id"`
+	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
 	ExternalID  string             `bson:"external_id" json:"external_id"`
 	Name        string             `bson:"name" json:"name"`
 	Code        string             `bson:"code" json:"code"`
@@ -41,12 +41,12 @@ type Game struct {
 	MatchID    primitive.ObjectID `bson:"match_id" json:"match_id"`
 	ExternalID string             `bson:"external_id" json:"external_id"`
 	Number     int                `bson:"game_number" json:"game_number"`
-	Winner     primitive.ObjectID `bson:"winner" json:"winner"`
-	Frames     []Frame            `bson:"frames" json:"frames"`
-	Duration   int                `bson:"duration" json:"duration"` // in seconds
-	Teams      []GameTeam         `bson:"teams" json:"teams"`
-	Players    []GamePlayer       `bson:"players" json:"players"`
-	StartTime  time.Time          `bson:"start_time" json:"start_time"`
+	Winner     primitive.ObjectID `bson:"winner,omitempty" json:"winner"`
+	Frames     []Frame            `bson:"frames,omitempty" json:"frames"`
+	Duration   int                `bson:"duration,omitempty" json:"duration"` // in seconds
+	StartTime  time.Time          `bson:"start_time,omitempty" json:"start_time,omitempty"`
+	Teams      []GameTeam         `bson:"teams,omitempty" json:"teams"`
+	Players    []GamePlayer       `bson:"players,omitempty" json:"players"`
 	State      string             `bson:"state" json:"state"` // unloaded, loaded, error
 	ErrorMsg   string             `bson:"error_message,omitempty" json:"error_message,omitempty"`
 }
@@ -54,17 +54,23 @@ type Game struct {
 type GameTeam struct {
 	ID     primitive.ObjectID `bson:"team_id" json:"team_id"`
 	Side   string             `bson:"side" json:"side"`
-	Winner bool               `bson:"winner" json:"winner"`
+	Winner bool               `bson:"winner,omitempty" json:"winner"`
 
 	// fallback fields to teams collection
-	ExternalID string `json:"external_id"`
-	Name       string `json:"name"`
+	ExternalID string `bson:"-" json:"external_id"`
+	Name       string `bson:"-" json:"name"`
 }
 
 type GamePlayer struct {
 	PlayerID primitive.ObjectID `bson:"player_id" json:"player_id"`
 	Side     string             `bson:"side" json:"side"`
 	Champion string             `bson:"champion" json:"champion"`
+	Role     string             `bson:"role" json:"role"`
+
+	// fallback fields to games collection
+	ExternalID string             `bson:"-" json:"external_id"`
+	Name       string             `bson:"-" json:"name"`
+	TeamID     primitive.ObjectID `bson:"-" json:"team_id"`
 }
 
 type Frame struct {
@@ -73,22 +79,21 @@ type Frame struct {
 	Teams     []FrameTeam        `bson:"teams" json:"teams"`
 	Players   []FramePlayer      `bson:"players" json:"players"`
 	Time      int                `bson:"time" json:"time"` // in seconds
-	Timestamp time.Time          `bson:"timestamp" json:"rfc460Timestamp"`
+	TimeStamp time.Time          `bson:"timestamp" json:"timestamp"`
 }
 
 type FrameTeam struct {
-	TeamID     primitive.ObjectID `bson:"team_id" json:"id"`
+	TeamID     primitive.ObjectID `bson:"team_id" json:"team_id"`
 	Gold       int                `bson:"gold" json:"totalGold"`
 	Towers     int                `bson:"towers" json:"towers"`
-	Dragons    int                `bson:"dragons" json:"dragons"`
+	Dragons    []string           `bson:"dragons" json:"dragons"`
 	Barons     int                `bson:"barons" json:"barons"`
-	Heralds    int                `bson:"heralds" json:"heralds"`
 	Inhibitors int                `bson:"inhibitors" json:"inhibitors"`
 	TotalKills int                `bson:"total_kills" json:"totalKills"`
 }
 
 type FramePlayer struct {
-	PlayerID            primitive.ObjectID `bson:"player_id" json:"id"`
+	PlayerID            primitive.ObjectID `bson:"player_id,omitempty" json:"player_id"`
 	Level               int                `bson:"level" json:"level"`
 	Kills               int                `bson:"kills" json:"kills"`
 	Deaths              int                `bson:"deaths" json:"deaths"`
