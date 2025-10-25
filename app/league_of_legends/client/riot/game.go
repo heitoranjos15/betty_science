@@ -31,7 +31,7 @@ func (c *gameClient) LoadData(match models.Match) ([]models.Game, error) {
 		game.MatchID = match.ID
 
 		if details.Number == 1 {
-			game.StartTime = match.StartTime
+			game.ScheduleTime = match.StartTime
 		}
 
 		response = append(response, game)

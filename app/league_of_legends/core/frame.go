@@ -19,14 +19,16 @@ type frameTeamClient interface {
 
 type TeamFrameCore struct {
 	client    frameTeamClient
-	db        gameDB
+	db        frameDB
+	gameDB    gameDB
 	playersDB playersDB
 }
 
-func NewTeamFrameCore(client frameTeamClient, db gameDB, playersDB playersDB) *TeamFrameCore {
+func NewTeamFrameCore(client frameTeamClient, db frameDB, gameDB gameDB, playersDB playersDB) *TeamFrameCore {
 	return &TeamFrameCore{
 		client:    client,
 		db:        db,
+		gameDB:    gameDB,
 		playersDB: playersDB,
 	}
 }
@@ -34,31 +36,76 @@ func NewTeamFrameCore(client frameTeamClient, db gameDB, playersDB playersDB) *T
 func (ec *TeamFrameCore) Load() error {
 	ctx := context.Background()
 
-	games, err := ec.db.GetGames(ctx, bson.M{"state": "completed"})
+	games, err := ec.gameDB.GetGames(ctx, bson.M{
+		// "external_id": "113475798006664639",
+		"state": "completed",
+		"load_state": bson.M{
+			"$ne": "loaded",
+		},
+	})
 	if err != nil {
 		log.Println("[core-frame] Error fetching games:", err)
 		return err
 	}
 
 	for i, game := range games {
+		time.Sleep(2 * time.Second) // to avoid rate limiting
+
 		frame, err := ec.client.LoadData(game)
 		if err != nil {
 			log.Printf("[core-frame] Error loading frames for game %s: %v", game.ExternalID, err)
+			games[i].LoadState = "error"
+			games[i].ErrorMsg = err.Error()
+			err = ec.gameDB.SaveGame(ctx, games[i])
+			if err != nil {
+				log.Printf("[core-frame] Error saving error state for game %s: %v", game.ExternalID, err)
+			}
 			continue
 		}
-		games[i].Frames = append(games[i].Frames, frame.Frame)
 
-		// if i == 1 {
-		// 	players := ec.playersEnrich(frame.PlayerGamesDetails)
-		// }
+		games[i].StartTime = frame.GameStart
+		games[i].Duration = frame.GameEnd.Sub(frame.GameStart).Seconds()
+		games[i].Winner = frame.WinnerID
 
-		time.Sleep(2 * time.Second) // to avoid rate limiting
+		players := ec.getPlayersData(frame.Players)
+		if err := ec.playersDB.SaveBulkPlayers(ctx, players); err != nil {
+			log.Printf("[core-frame] Error saving players for game %s: %v", game.ExternalID, err)
+		}
+
+		gamePlayers := []models.GamePlayer{}
+		for j, p := range frame.Players {
+			gamePlayers = append(gamePlayers, models.GamePlayer{
+				PlayerID: players[j].ID,
+				Role:     p.Role,
+				Champion: p.Champion,
+				Side:     p.Side,
+			})
+			log.Printf("[core-frame] Player %d: %s, Role: %s, TeamID: %s", j+1, p.Name, p.Role, p.TeamID.Hex())
+		}
+		games[i].Players = gamePlayers
+
+		games[i].LoadState = "loaded"
+		err = ec.gameDB.SaveGame(ctx, games[i])
+		if err != nil {
+			log.Printf("[core-frame] Error updating game %s: %v", game.ExternalID, err)
+			continue
+		}
+
+		err = ec.db.SaveFrame(ctx, frame.Frame)
+		if err != nil {
+			log.Printf("[core-frame] Error saving frame for game %s: %v", game.ExternalID, err)
+			continue
+		}
+
+		log.Printf("[core-frame] loaded frames for game %s", game.ExternalID)
 	}
+
+	log.Printf("[core-frame] loaded frames for %d games", len(games))
 
 	return nil
 }
 
-func (ec *TeamFrameCore) playersEnrich(playerFrame []models.GamePlayer) []models.Player {
+func (ec *TeamFrameCore) getPlayersData(playerFrame []client.PlayerFrame) []models.Player {
 	var players []models.Player
 
 	for _, pf := range playerFrame {
@@ -77,14 +124,15 @@ func (ec *TeamFrameCore) playersEnrich(playerFrame []models.GamePlayer) []models
 			continue
 		}
 
-		if !slices.Contains(existPlayer.Roles, pf.Role) {
-			existPlayer.Roles = append(existPlayer.Roles, pf.Role)
+		if len(existPlayer.Roles) == 0 || !slices.Contains(existPlayer.Roles, pf.Role) {
 			existPlayer.ActualRole = pf.Role
+			existPlayer.Roles = append(existPlayer.Roles, pf.Role)
 		}
-		if !slices.Contains(existPlayer.Teams, pf.TeamID) {
-			existPlayer.Teams = append(existPlayer.Teams, pf.TeamID)
+		if len(existPlayer.Teams) == 0 || !slices.Contains(existPlayer.Teams, pf.TeamID) {
 			existPlayer.ActualTeam = pf.TeamID
+			existPlayer.Teams = append(existPlayer.Teams, pf.TeamID)
 		}
+		players = append(players, existPlayer)
 
 	}
 	return players

@@ -28,10 +28,15 @@ type teamDB interface {
 
 type gameDB interface {
 	SaveBulkGames(context.Context, []models.Game) error
+	SaveGame(context.Context, models.Game) error
 	GetGames(context.Context, bson.M) ([]models.Game, error)
 }
 
 type playersDB interface {
 	GetPlayerByExternalID(ctx context.Context, externalID string) (models.Player, error)
 	SaveBulkPlayers(ctx context.Context, players []models.Player) error
+}
+
+type frameDB interface {
+	SaveFrame(context.Context, models.Frame) error
 }

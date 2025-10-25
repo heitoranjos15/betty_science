@@ -38,14 +38,14 @@ func (ec *MatchCore) Load() error {
 		return err
 	}
 
-	for _, tt := range data.TeamsTournaments {
+	for _, tt := range data.TeamsDetails {
 		if err := ec.saveTeamTournament(ctx, tt.Team, tt.TournamentName); err != nil {
 			log.Println("[core-match] couldnt save team tournament", err)
 		}
 	}
 
 	log.Printf("[core-match] loaded %d matches", len(data.Match))
-	log.Printf("[core-match] loaded %d team-tournament associations", len(data.TeamsTournaments))
+	log.Printf("[core-match] loaded %d team-tournament associations", len(data.TeamsDetails))
 
 	return nil
 }

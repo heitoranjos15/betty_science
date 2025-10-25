@@ -9,4 +9,5 @@ type api interface {
 	GetGameDetails(string) (GameDetailsResponse, error)
 	GetFrames(string, time.Time) (FramesResponse, error)
 	GetPlayerFrames(string, time.Time) (PlayerFramesResponse, error)
+	GetFirstFrame(string, time.Time) (GameFrame, error)
 }

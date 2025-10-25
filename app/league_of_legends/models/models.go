@@ -37,18 +37,19 @@ type Player struct {
 }
 
 type Game struct {
-	ID         primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	MatchID    primitive.ObjectID `bson:"match_id" json:"match_id"`
-	ExternalID string             `bson:"external_id" json:"external_id"`
-	Number     int                `bson:"game_number" json:"game_number"`
-	Winner     primitive.ObjectID `bson:"winner,omitempty" json:"winner"`
-	Frames     []Frame            `bson:"frames,omitempty" json:"frames"`
-	Duration   int                `bson:"duration,omitempty" json:"duration"` // in seconds
-	StartTime  time.Time          `bson:"start_time,omitempty" json:"start_time,omitempty"`
-	Teams      []GameTeam         `bson:"teams,omitempty" json:"teams"`
-	Players    []GamePlayer       `bson:"players,omitempty" json:"players"`
-	State      string             `bson:"state" json:"state"` // unloaded, loaded, error
-	ErrorMsg   string             `bson:"error_message,omitempty" json:"error_message,omitempty"`
+	ID           primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	MatchID      primitive.ObjectID `bson:"match_id" json:"match_id"`
+	ExternalID   string             `bson:"external_id" json:"external_id"`
+	Number       int                `bson:"game_number" json:"game_number"`
+	Winner       primitive.ObjectID `bson:"winner,omitempty" json:"winner"`
+	Duration     float64            `bson:"duration,omitempty" json:"duration"` // in seconds
+	ScheduleTime time.Time          `bson:"schedule_time,omitempty" json:"start_time,omitempty"`
+	StartTime    time.Time          `bson:"start_time,omitempty" json:"actual_start_time,omitempty"`
+	Teams        []GameTeam         `bson:"teams,omitempty" json:"teams"`
+	Players      []GamePlayer       `bson:"players,omitempty" json:"players"`
+	State        string             `bson:"state" json:"state"` // unloaded, loaded, error
+	LoadState    string             `bson:"load_state" json:"load_state"`
+	ErrorMsg     string             `bson:"error_message,omitempty" json:"error_message,omitempty"`
 }
 
 type GameTeam struct {
@@ -66,11 +67,6 @@ type GamePlayer struct {
 	Side     string             `bson:"side" json:"side"`
 	Champion string             `bson:"champion" json:"champion"`
 	Role     string             `bson:"role" json:"role"`
-
-	// fallback fields to games collection
-	ExternalID string             `bson:"-" json:"external_id"`
-	Name       string             `bson:"-" json:"name"`
-	TeamID     primitive.ObjectID `bson:"-" json:"team_id"`
 }
 
 type Frame struct {
@@ -94,6 +90,7 @@ type FrameTeam struct {
 
 type FramePlayer struct {
 	PlayerID            primitive.ObjectID `bson:"player_id,omitempty" json:"player_id"`
+	ExternalID          string             `bson:"external_id" json:"external_id"`
 	Level               int                `bson:"level" json:"level"`
 	Kills               int                `bson:"kills" json:"kills"`
 	Deaths              int                `bson:"deaths" json:"deaths"`

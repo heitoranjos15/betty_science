@@ -112,3 +112,43 @@ func (r *MongoRepo) GetGames(ctx context.Context, filter bson.M) ([]models.Game,
 	}
 	return games, nil
 }
+
+func (r *MongoRepo) GetPlayerByExternalID(ctx context.Context, externalID string) (models.Player, error) {
+	var player models.Player
+	filter := primitive.M{"external_id": externalID}
+	err := r.collection.FindOne(ctx, filter).Decode(&player)
+	return player, err
+}
+
+func (r *MongoRepo) SaveBulkPlayers(ctx context.Context, players []models.Player) error {
+	var models []mongo.WriteModel
+
+	for _, player := range players {
+		filter := bson.M{"external_id": player.ExternalID}
+		update := bson.M{"$set": player}
+		model := mongo.NewUpdateOneModel().
+			SetFilter(filter).
+			SetUpdate(update).
+			SetUpsert(true)
+		models = append(models, model)
+	}
+	_, err := r.collection.BulkWrite(ctx, models)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *MongoRepo) SaveGame(ctx context.Context, game models.Game) error {
+	filter := bson.M{"external_id": game.ExternalID}
+	update := bson.M{"$set": game}
+	_, err := r.collection.UpdateOne(ctx, filter, update, options.Update().SetUpsert(true))
+	return err
+}
+
+func (r *MongoRepo) SaveFrame(ctx context.Context, frame models.Frame) error {
+	filter := bson.M{"game_id": frame.GameID, "timestamp": frame.TimeStamp}
+	update := bson.M{"$set": frame}
+	_, err := r.collection.UpdateOne(ctx, filter, update, options.Update().SetUpsert(true))
+	return err
+}

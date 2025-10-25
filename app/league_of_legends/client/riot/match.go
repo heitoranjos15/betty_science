@@ -4,6 +4,7 @@ import (
 	"betty/science/app/league_of_legends/client"
 	"betty/science/app/league_of_legends/models"
 	"errors"
+	"fmt"
 	"log"
 	"time"
 )
@@ -44,7 +45,7 @@ func (c *clientMatch) LoadData(_ any) (client.MatchResponse, error) {
 			log.Printf("[client-riot] Skipping event ID %s due to team parsing error: %v", event.Match.ID, err)
 			continue
 		}
-		response.TeamsTournaments = append(response.TeamsTournaments, teams...)
+		response.TeamsDetails = append(response.TeamsDetails, teams...)
 	}
 	return response, nil
 }
@@ -75,11 +76,11 @@ func (c clientMatch) match(event Event) (models.Match, error) {
 	}, nil
 }
 
-func (c clientMatch) team(event Event) ([]client.TeamTournament, error) {
-	teams := []client.TeamTournament{}
+func (c clientMatch) team(event Event) ([]client.TeamDetails, error) {
+	teams := []client.TeamDetails{}
 	for _, team := range event.Match.Teams {
-		teams = append(teams, client.TeamTournament{
-			TournamentName: event.League.Name,
+		teams = append(teams, client.TeamDetails{
+			TournamentName: fmt.Sprintf("%s %d", event.League.Name, time.Now().Year()),
 			Team: models.Team{
 				Name:     team.Name,
 				ImageURL: team.Image,

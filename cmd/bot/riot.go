@@ -32,8 +32,10 @@ func main() {
 	}
 
 	commands := map[string][]func(){
-		"next_match": {bot.nextMatchBot, bot.loadGamesBot},
-		// "load_frames": {bot.loadFramesBot},
+		"schedule":       {bot.nextMatchBot},
+		"next_match":     {bot.nextMatchBot, bot.loadGamesBot},
+		"complete_games": {bot.loadGamesBot, bot.loadFramesBot},
+		"load_frames":    {bot.loadFramesBot},
 	}
 
 	cmd := args[1]
@@ -85,17 +87,19 @@ func (b Bot) loadGamesBot() {
 	}
 }
 
-// func (b Bot) loadFramesBot() {
-// 	api := integrations.NewLeagueOfLegendsAPI(b.cfg.RiotAPIKey)
-// 	client := riot.NewTeamFramesClient(api)
-// 	gameRepository := repo.NewMongoRepo("games", b.mongo)
-// 	coreFrame := core.NewTeamFrameCore(client, gameRepository)
-// 	err := coreFrame.Load()
-// 	if err != nil {
-// 		log.Fatal(err)
-// 		panic(err)
-// 	}
-// }
+func (b Bot) loadFramesBot() {
+	api := integrations.NewLeagueOfLegendsAPI(b.cfg.RiotAPIKey)
+	client := riot.NewTeamFramesClient(api)
+	frameRepository := repo.NewMongoRepo("frames", b.mongo)
+	gameRepository := repo.NewMongoRepo("games", b.mongo)
+	playersRepository := repo.NewMongoRepo("players", b.mongo)
+	coreFrame := core.NewTeamFrameCore(client, frameRepository, gameRepository, playersRepository)
+	err := coreFrame.Load()
+	if err != nil {
+		log.Fatal(err)
+		panic(err)
+	}
+}
 
 func initMongoDB(uri, dbName string) *mongo.Database {
 	// monitor := &event.CommandMonitor{

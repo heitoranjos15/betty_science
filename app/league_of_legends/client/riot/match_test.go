@@ -33,17 +33,22 @@ func (m *MockClient) GetGameDetails(matchID string) (client.GameDetailsResponse,
 }
 
 func (m *MockClient) GetFrames(gameID string, startingTime time.Time) (client.FramesResponse, error) {
-	args := m.Called(gameID)
+	args := m.Called(gameID, startingTime)
 
 	return args.Get(0).(client.FramesResponse), args.Error(1)
 }
 
 func (m *MockClient) GetPlayerFrames(gameID string, startingTime time.Time) (client.PlayerFramesResponse, error) {
-	args := m.Called(gameID)
+	args := m.Called(gameID, startingTime)
 
 	return args.Get(0).(client.PlayerFramesResponse), args.Error(1)
 }
 
+func (m *MockClient) GetFirstFrame(gameID string, startingTime time.Time) (client.GameFrame, error) {
+	args := m.Called(gameID, startingTime)
+
+	return args.Get(0).(client.GameFrame), args.Error(1)
+}
 func loadMockData(path string) client.ScheduleResponse {
 	file, err := os.Open(path)
 	if err != nil {

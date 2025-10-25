@@ -78,26 +78,25 @@ func (api *LeagueOfLegendsClient) GetGameDetails(eventID string) (riot.GameDetai
 
 type LolMatchStartTime time.Time
 
-func (t LolMatchStartTime) formatSeconds() time.Time {
-
-	date := time.Now().UTC()
+func (t LolMatchStartTime) formatSeconds(date time.Time) time.Time {
 	seconds := date.Second()
 	if seconds%10 > 0 {
 		seconds = seconds - (seconds % 10)
 	}
-	date = date.Add(-60 * time.Second)
 	return time.Date(date.Year(), date.Month(), date.Day(), date.Hour(), date.Minute(), seconds, 0, time.UTC)
 }
 
-func (t LolMatchStartTime) ToString() string {
-	return t.formatSeconds().Format(time.RFC3339) + "Z"
+func (t LolMatchStartTime) ToString(date time.Time) string {
+	return t.formatSeconds(date).Format(time.RFC3339)
 }
 
 func (api *LeagueOfLegendsClient) GetFrames(gameID string, startingTime time.Time) (riot.FramesResponse, error) {
 	fmtStartTime := LolMatchStartTime(startingTime)
 	var result riot.FramesResponse
 
-	url := fmt.Sprintf("%s/livestats/v1/window/%s?startingTime=%s", api.GameLiveURL, gameID, fmtStartTime.ToString())
+	url := fmt.Sprintf("%s/livestats/v1/window/%s?startingTime=%s", api.GameLiveURL, gameID, fmtStartTime.ToString(startingTime))
+	log.Println("Fetching frames from URL:", url)
+
 	body, status, err := api.get(url)
 	if err != nil {
 		return result, err
@@ -111,7 +110,7 @@ func (api *LeagueOfLegendsClient) GetFrames(gameID string, startingTime time.Tim
 	}
 
 	if status == 204 {
-		return result, errors.New("game has no data (possibly not live yet)")
+		return result, riot.ErrorGameFrameNoContent
 	}
 
 	return result, fmt.Errorf("error fetching game data: %d - %s", status, string(body))
@@ -139,7 +138,7 @@ func (api *LeagueOfLegendsClient) GetFirstFrame(gameID string, startTime time.Ti
 			}
 		}
 
-		startTime = time.Time(fmtStartTime.formatSeconds()).Add(5 * time.Minute)
+		startTime = time.Time(fmtStartTime.formatSeconds(startTime)).Add(5 * time.Minute)
 
 		time.Sleep(2 * time.Second)
 		retryCount++
@@ -149,7 +148,9 @@ func (api *LeagueOfLegendsClient) GetFirstFrame(gameID string, startTime time.Ti
 func (api *LeagueOfLegendsClient) GetPlayerFrames(gameID string, time time.Time) (riot.PlayerFramesResponse, error) {
 	fmtStartTime := LolMatchStartTime(time)
 	var result riot.PlayerFramesResponse
-	body, status, err := api.get(fmt.Sprintf("%s/livestats/v1/details/%s?startingTime=%s", api.GameLiveURL, gameID, fmtStartTime.ToString()))
+	url := fmt.Sprintf("%s/livestats/v1/details/%s?startingTime=%s", api.GameLiveURL, gameID, fmtStartTime.ToString(time))
+	log.Println("Fetching player frames from URL:", url)
+	body, status, err := api.get(url)
 	if err != nil {
 		return result, err
 	}

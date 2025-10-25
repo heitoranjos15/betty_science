@@ -28,13 +28,13 @@ run:
 	$(GO) run main.go
 
 # Run the bot located in cmd/bot/riot.go
-.PHONY: load_games
-load_games:
-	$(GO) run cmd/bot/riot.go load_games
+.PHONY: load_frames
+load_frames:
+	$(GO) run cmd/bot/riot.go load_frames
 
-.PHONY: next_match
-next_match:
-	$(GO) run cmd/bot/riot.go CMD=next_match
+.PHONY: schedule
+schedule:
+	$(GO) run cmd/bot/riot.go CMD=schedule
 
 # Build the Go application
 .PHONY: build-go
