@@ -38,6 +38,12 @@ func (r *MongoRepo) SaveBulkMatches(ctx context.Context, matches []models.Match)
 	}
 	return nil
 }
+func (r *MongoRepo) SaveMatch(ctx context.Context, match models.Match) error {
+	filter := bson.M{"external_id": match.ExternalID}
+	update := bson.M{"$set": match}
+	_, err := r.collection.UpdateOne(ctx, filter, update, options.Update().SetUpsert(true))
+	return err
+}
 
 func (r *MongoRepo) GetMatches(ctx context.Context, filter bson.M) ([]models.Match, error) {
 	var matches []models.Match

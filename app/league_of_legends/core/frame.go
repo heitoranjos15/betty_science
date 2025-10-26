@@ -13,19 +13,19 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type frameTeamClient interface {
+type frameClient interface {
 	LoadData(game models.Game) (client.FrameResponse, error)
 }
 
-type TeamFrameCore struct {
-	client    frameTeamClient
+type FrameCore struct {
+	client    frameClient
 	db        frameDB
 	gameDB    gameDB
 	playersDB playersDB
 }
 
-func NewTeamFrameCore(client frameTeamClient, db frameDB, gameDB gameDB, playersDB playersDB) *TeamFrameCore {
-	return &TeamFrameCore{
+func NewFrameCore(client frameClient, db frameDB, gameDB gameDB, playersDB playersDB) *FrameCore {
+	return &FrameCore{
 		client:    client,
 		db:        db,
 		gameDB:    gameDB,
@@ -33,11 +33,11 @@ func NewTeamFrameCore(client frameTeamClient, db frameDB, gameDB gameDB, players
 	}
 }
 
-func (ec *TeamFrameCore) Load() error {
+func (ec *FrameCore) Load() error {
 	ctx := context.Background()
 
 	games, err := ec.gameDB.GetGames(ctx, bson.M{
-		// "external_id": "113475798006664639",
+		// "external_id": "113475798006664624",
 		"state": "completed",
 		"load_state": bson.M{
 			"$ne": "loaded",
@@ -80,7 +80,6 @@ func (ec *TeamFrameCore) Load() error {
 				Champion: p.Champion,
 				Side:     p.Side,
 			})
-			log.Printf("[core-frame] Player %d: %s, Role: %s, TeamID: %s", j+1, p.Name, p.Role, p.TeamID.Hex())
 		}
 		games[i].Players = gamePlayers
 
@@ -91,13 +90,17 @@ func (ec *TeamFrameCore) Load() error {
 			continue
 		}
 
+		for i, pData := range players {
+			frame.Frame.Players[i].PlayerID = pData.ID
+		}
+
 		err = ec.db.SaveFrame(ctx, frame.Frame)
 		if err != nil {
 			log.Printf("[core-frame] Error saving frame for game %s: %v", game.ExternalID, err)
 			continue
 		}
 
-		log.Printf("[core-frame] loaded frames for game %s", game.ExternalID)
+		log.Printf("[core-frame] loaded frames for game %s", game.ID)
 	}
 
 	log.Printf("[core-frame] loaded frames for %d games", len(games))
@@ -105,7 +108,7 @@ func (ec *TeamFrameCore) Load() error {
 	return nil
 }
 
-func (ec *TeamFrameCore) getPlayersData(playerFrame []client.PlayerFrame) []models.Player {
+func (ec *FrameCore) getPlayersData(playerFrame []client.PlayerFrame) []models.Player {
 	var players []models.Player
 
 	for _, pf := range playerFrame {

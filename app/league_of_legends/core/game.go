@@ -36,7 +36,7 @@ func NewGameCore(cfg *config.Config, client gameClient, db gameDB, teamDB teamDB
 func (ec *GameCore) Load() error {
 	ctx := context.Background()
 
-	matches, err := ec.matchDB.GetMatches(ctx, bson.M{})
+	matches, err := ec.matchDB.GetMatches(ctx, bson.M{"load_state": "without_games"})
 
 	if err != nil {
 		log.Println("[core-game] Error fetching matches:", err)
@@ -52,6 +52,10 @@ func (ec *GameCore) Load() error {
 		if err := ec.db.SaveBulkGames(ctx, games); err != nil {
 			log.Println("[core-game] Error saving game data:", err)
 			return err
+		}
+		m.LoadState = "loaded"
+		if err := ec.matchDB.SaveMatch(ctx, m); err != nil {
+			log.Println("[core-game] Error updating match load state:", err)
 		}
 
 		log.Printf("[core-game] loaded %d games for match %s", len(games), m.ExternalID)

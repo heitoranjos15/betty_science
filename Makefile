@@ -36,6 +36,14 @@ load_frames:
 schedule:
 	$(GO) run cmd/bot/riot.go CMD=schedule
 
+.PHONY: update_matches
+update_matches:
+	$(GO) run cmd/bot/riot.go CMD=update_matches
+
+.PHONY: complete_games
+complete_games:
+	$(GO) run cmd/bot/riot.go CMD=complete_games
+
 # Build the Go application
 .PHONY: build-go
 build-go:

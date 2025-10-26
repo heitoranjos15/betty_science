@@ -33,7 +33,7 @@ func main() {
 
 	commands := map[string][]func(){
 		"schedule":       {bot.nextMatchBot},
-		"next_match":     {bot.nextMatchBot, bot.loadGamesBot},
+		"update_matches": {bot.nextMatchBot, bot.loadGamesBot},
 		"complete_games": {bot.loadGamesBot, bot.loadFramesBot},
 		"load_frames":    {bot.loadFramesBot},
 	}
@@ -89,11 +89,11 @@ func (b Bot) loadGamesBot() {
 
 func (b Bot) loadFramesBot() {
 	api := integrations.NewLeagueOfLegendsAPI(b.cfg.RiotAPIKey)
-	client := riot.NewTeamFramesClient(api)
+	client := riot.NewFramesClient(api)
 	frameRepository := repo.NewMongoRepo("frames", b.mongo)
 	gameRepository := repo.NewMongoRepo("games", b.mongo)
 	playersRepository := repo.NewMongoRepo("players", b.mongo)
-	coreFrame := core.NewTeamFrameCore(client, frameRepository, gameRepository, playersRepository)
+	coreFrame := core.NewFrameCore(client, frameRepository, gameRepository, playersRepository)
 	err := coreFrame.Load()
 	if err != nil {
 		log.Fatal(err)

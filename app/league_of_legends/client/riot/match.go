@@ -73,6 +73,7 @@ func (c clientMatch) match(event Event) (models.Match, error) {
 		BestOf:     event.Match.Strategy.Count,
 		Format:     event.Type,
 		League:     event.League.Name,
+		LoadState:  "without_games",
 	}, nil
 }
 

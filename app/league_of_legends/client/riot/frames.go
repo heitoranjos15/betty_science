@@ -10,17 +10,17 @@ import (
 
 var ErrorGameFrameNoContent = errors.New("game frame has no content")
 
-type clientTeamFrame struct {
+type clientFrame struct {
 	api api
 }
 
-func NewTeamFramesClient(api api) *clientTeamFrame {
-	return &clientTeamFrame{
+func NewFramesClient(api api) *clientFrame {
+	return &clientFrame{
 		api: api,
 	}
 }
 
-func (c *clientTeamFrame) LoadData(game models.Game) (client.FrameResponse, error) {
+func (c *clientFrame) LoadData(game models.Game) (client.FrameResponse, error) {
 	var frames client.FrameResponse
 	log.Println("[client-team-frame] Loading frames for game:", game.ExternalID)
 
@@ -33,7 +33,7 @@ func (c *clientTeamFrame) LoadData(game models.Game) (client.FrameResponse, erro
 	frame := gameFrames.Frames[len(gameFrames.Frames)-1]
 	frames.GameStart, frames.GameEnd = c.findGameStartAndEnd(game, frame)
 
-	playerFrames, err := c.api.GetPlayerFrames(game.ExternalID, frames.GameEnd)
+	playerFrames, err := c.api.GetPlayerFrames(game.ExternalID, now)
 	if err != nil {
 		return frames, err
 	}
@@ -63,24 +63,22 @@ func (c *clientTeamFrame) LoadData(game models.Game) (client.FrameResponse, erro
 	return frames, nil
 }
 
-func (c *clientTeamFrame) findGameStartAndEnd(game models.Game, frame GameFrame) (time.Time, time.Time) {
+func (c *clientFrame) findGameStartAndEnd(game models.Game, frame GameFrame) (time.Time, time.Time) {
 	gameEnd := time.Time{}
 	gameStart := game.StartTime
 
-	if frame.GameState == "finished" {
-		timestamp, _ := time.Parse(time.RFC3339, frame.Rfc460Timestamp)
-		gameEnd = timestamp
+	timestamp, _ := time.Parse(time.RFC3339, frame.Rfc460Timestamp)
+	gameEnd = timestamp
 
-		if game.StartTime.IsZero() {
-			gameStart = c.gameStart(game.ExternalID, timestamp)
-			return gameStart, gameEnd
-		}
+	if game.StartTime.IsZero() {
+		gameStart = c.gameStart(game.ExternalID, timestamp)
+		return gameStart, gameEnd
 	}
 
 	return gameStart, gameEnd
 }
 
-func (c clientTeamFrame) gameStart(gameExternalID string, endGameTime time.Time) time.Time {
+func (c clientFrame) gameStart(gameExternalID string, endGameTime time.Time) time.Time {
 	pastTime := endGameTime.Add(-20 * time.Minute) // assuming average game duration of 20 minutes
 	startTime := pastTime
 
@@ -106,7 +104,7 @@ func (c clientTeamFrame) gameStart(gameExternalID string, endGameTime time.Time)
 	return startTime
 }
 
-func (c clientTeamFrame) framePlayers(teams []models.GameTeam, gameMetadata GameMetadata, playerFrame ParticipantFrame) []models.FramePlayer {
+func (c clientFrame) framePlayers(teams []models.GameTeam, gameMetadata GameMetadata, playerFrame ParticipantFrame) []models.FramePlayer {
 	var frame []models.FramePlayer
 
 	for _, team := range teams {
@@ -147,7 +145,7 @@ func (c clientTeamFrame) framePlayers(teams []models.GameTeam, gameMetadata Game
 	return frame
 }
 
-func (c clientTeamFrame) frameTeams(teams []models.GameTeam, gameMetadata GameFrame) []models.FrameTeam {
+func (c clientFrame) frameTeams(teams []models.GameTeam, gameMetadata GameFrame) []models.FrameTeam {
 	var frame []models.FrameTeam
 
 	for _, team := range teams {
@@ -166,7 +164,7 @@ func (c clientTeamFrame) frameTeams(teams []models.GameTeam, gameMetadata GameFr
 	return frame
 }
 
-func (c clientTeamFrame) playersDetails(team []models.GameTeam, gameMetadata GameMetadata) []client.PlayerFrame {
+func (c clientFrame) playersDetails(team []models.GameTeam, gameMetadata GameMetadata) []client.PlayerFrame {
 	var players []client.PlayerFrame
 
 	for _, team := range team {
@@ -186,14 +184,14 @@ func (c clientTeamFrame) playersDetails(team []models.GameTeam, gameMetadata Gam
 	return players
 }
 
-func (c clientTeamFrame) findTeamMetadata(side string, frame GameFrame) TeamFrame {
+func (c clientFrame) findTeamMetadata(side string, frame GameFrame) TeamFrame {
 	if side == "blue" {
 		return frame.BlueTeam
 	}
 	return frame.RedTeam
 }
 
-func (c clientTeamFrame) findParticipantMetadata(side string, metadata GameMetadata) []ParticipantMeta {
+func (c clientFrame) findParticipantMetadata(side string, metadata GameMetadata) []ParticipantMeta {
 	if side == "blue" {
 		return metadata.BlueTeamMetadata.ParticipantMetadata
 	}

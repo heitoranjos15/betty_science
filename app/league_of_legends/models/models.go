@@ -14,6 +14,7 @@ type Match struct {
 	Format     string             `bson:"format" json:"format"`
 	League     string             `bson:"league" json:"league"`
 	ExternalID string             `bson:"external_id" json:"external_id"`
+	LoadState  string             `bson:"load_state" json:"load_state"`
 }
 
 type Team struct {
@@ -89,7 +90,7 @@ type FrameTeam struct {
 }
 
 type FramePlayer struct {
-	PlayerID            primitive.ObjectID `bson:"player_id,omitempty" json:"player_id"`
+	PlayerID            primitive.ObjectID `bson:"player_id" json:"player_id"`
 	ExternalID          string             `bson:"external_id" json:"external_id"`
 	Level               int                `bson:"level" json:"level"`
 	Kills               int                `bson:"kills" json:"kills"`

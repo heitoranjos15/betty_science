@@ -16,6 +16,7 @@ type clientAPI interface {
 
 type matchDB interface {
 	SaveBulkMatches(context.Context, []models.Match) error
+	SaveMatch(context.Context, models.Match) error
 	GetMatches(context.Context, bson.M) ([]models.Match, error)
 }
 
