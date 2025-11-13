@@ -36,6 +36,7 @@ func main() {
 		"update_matches": {bot.nextMatchBot, bot.loadGamesBot},
 		"complete_games": {bot.loadGamesBot, bot.loadFramesBot},
 		"load_frames":    {bot.loadFramesBot},
+		"load_games":     {bot.loadGamesBot},
 	}
 
 	cmd := args[1]

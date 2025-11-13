@@ -9,6 +9,7 @@ type Config struct {
 	RiotSleep  int    `mapstructure:"RIOT_SLEEP"`
 	MongoURI   string `mapstructure:"MONGO_URI"`
 	MongoDB    string `mapstructure:"MONGO_DB_NAME"`
+	Workers    int    `mapstructure:"WORKERS"`
 }
 
 func LoadConfig() *Config {
@@ -23,5 +24,6 @@ func LoadConfig() *Config {
 		RiotSleep:  viper.GetInt("RIOT_SLEEP"),
 		MongoURI:   viper.GetString("MONGO_URI"),
 		MongoDB:    viper.GetString("MONGO_DB_NAME"),
+		Workers:    viper.GetInt("WORKERS"),
 	}
 }

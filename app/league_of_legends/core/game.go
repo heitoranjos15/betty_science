@@ -4,7 +4,6 @@ import (
 	"betty/science/app/league_of_legends/models"
 	"betty/science/config"
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -13,6 +12,12 @@ import (
 
 type gameClient interface {
 	LoadData(match models.Match) ([]models.Game, error)
+}
+
+type outChanType struct {
+	game models.Game
+	m    models.Match
+	err  error
 }
 
 type GameCore struct {
@@ -42,48 +47,102 @@ func (ec *GameCore) Load() error {
 		log.Println("[core-game] Error fetching matches:", err)
 	}
 
-	for _, m := range matches {
-		games, err := ec.loadGamesForMatch(ctx, m)
-		if err != nil {
-			log.Printf(fmt.Sprintf("[core-game] Error loading games for match %s:", m.ExternalID), err)
-			continue
-		}
+	if len(matches) == 0 {
+		log.Println("[core-game] No matches to load games for")
+		return nil
+	}
+	bots := ec.cfg.Workers
+	outChan := make(chan outChanType)
 
-		if err := ec.db.SaveBulkGames(ctx, games); err != nil {
-			log.Println("[core-game] Error saving game data:", err)
-			return err
-		}
-		m.LoadState = "loaded"
-		if err := ec.matchDB.SaveMatch(ctx, m); err != nil {
-			log.Println("[core-game] Error updating match load state:", err)
-		}
-
-		log.Printf("[core-game] loaded %d games for match %s", len(games), m.ExternalID)
-		time.Sleep(2 * time.Second) // to avoid rate limiting
+	type bot struct {
+		name  string
+		emote string
+	}
+	botsNames := []bot{
+		{name: "Woody", emote: "🤠"},
+		{name: "Sasuke", emote: ":|"},
+		{name: "Gash", emote: ":D"},
+	}
+	limitBots := len(matches)
+	if len(matches) >= bots {
+		limitBots = len(matches) / bots
 	}
 
+	for i := 0; i < ec.cfg.Workers; i++ {
+		bot := botsNames[i]
+		log.Printf("[%s] hey", bot.name)
+		if i*limitBots >= len(matches) {
+			log.Printf("[%s] i dont need to work %s", bot.name, bot.emote)
+			break
+		}
+
+		loadMatches := matches[i*limitBots : (i+1)*limitBots]
+		log.Printf("[%s] loading %d matches %s", bot.name, len(loadMatches), bot.emote)
+
+		go ec.loadGamesForMatch(ctx, loadMatches, outChan)
+	}
+
+	matchesToSave := []models.Match{}
+	gamesToSave := []models.Game{}
+
+	for matchLoaded := range outChan {
+		log.Printf("[core-game] processed match %s", matchLoaded.m.ExternalID)
+		if matchLoaded.err != nil {
+			log.Printf("[core-game]error processing %s: %v", matchLoaded.m.ExternalID, matchLoaded.err)
+			continue
+		}
+		g := matchLoaded.game
+		m := matchLoaded.m
+
+		if g.State == "completed" {
+			m.LoadState = "loaded"
+		}
+		gamesToSave = append(gamesToSave, g)
+		matchesToSave = append(matchesToSave, m)
+	}
+
+	if err := ec.db.SaveBulkGames(ctx, gamesToSave); err != nil {
+		log.Println("[core-game] Error saving game data:", err)
+		return err
+	}
+
+	if err := ec.matchDB.SaveBulkMatches(ctx, matchesToSave); err != nil {
+		log.Println("[core-game] Error updating match load state:", err)
+		return err
+	}
+
+	log.Printf("[core-game] loaded %d games", len(gamesToSave))
+	log.Printf("[core-game] updated %d matches", len(matchesToSave))
 	return nil
 }
 
-func (ec *GameCore) loadGamesForMatch(ctx context.Context, match models.Match) ([]models.Game, error) {
-	games, err := ec.client.LoadData(match)
+func (ec *GameCore) loadGamesForMatch(ctx context.Context, matches []models.Match, outChan chan<- outChanType) {
+	defer close(outChan)
+	log.Printf("[core-game] loading games for %d matches", len(matches))
 
-	if err != nil {
-		log.Println("[core-game] Error loading game data:", err)
-		return games, err
-	}
+	for _, match := range matches {
+		games, err := ec.client.LoadData(match)
 
-	for i, g := range games {
-		gameTeams, err := ec.setGameTeamIDs(ctx, g)
 		if err != nil {
-			log.Println("[core-game] Error setting game team IDs:", err)
-			return games, err
+			log.Println("[core-game] Error loading game data:", err)
+			outChan <- outChanType{game: models.Game{}, m: match, err: err}
+			continue
 		}
-		games[i].Teams = gameTeams
-		games[i].MatchID = match.ID
-	}
 
-	return games, nil
+		for _, g := range games {
+			gameTeams, err := ec.setGameTeamIDs(ctx, g)
+
+			if err != nil {
+				log.Println("[core-game] Error setting game team IDs:", err)
+				continue
+			}
+			g.Teams = gameTeams
+			g.MatchID = match.ID
+			outChan <- outChanType{game: g, m: match, err: nil}
+			log.Printf("[core-game] loaded game %s for match %s", g.ExternalID, match.ExternalID)
+			time.Sleep(2 * time.Second) // to avoid rate limiting
+		}
+	}
 }
 
 func (ec *GameCore) setGameTeamIDs(ctx context.Context, game models.Game) ([]models.GameTeam, error) {

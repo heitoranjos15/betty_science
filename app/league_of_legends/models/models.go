@@ -7,14 +7,15 @@ import (
 )
 
 type Match struct {
-	ID         primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	StartTime  time.Time          `bson:"start_time" json:"start_time"`
-	State      string             `bson:"state" json:"state"`
-	BestOf     int                `bson:"best_of" json:"best_of"`
-	Format     string             `bson:"format" json:"format"`
-	League     string             `bson:"league" json:"league"`
-	ExternalID string             `bson:"external_id" json:"external_id"`
-	LoadState  string             `bson:"load_state" json:"load_state"`
+	ID         primitive.ObjectID   `bson:"_id,omitempty" json:"id"`
+	StartTime  time.Time            `bson:"start_time" json:"start_time"`
+	State      string               `bson:"state" json:"state"`
+	BestOf     int                  `bson:"best_of" json:"best_of"`
+	Format     string               `bson:"format" json:"format"`
+	League     string               `bson:"league" json:"league"`
+	ExternalID string               `bson:"external_id" json:"external_id"`
+	LoadState  string               `bson:"load_state" json:"load_state"`
+	TeamsID    []primitive.ObjectID `bson:"teams_id" json:"teams_id"`
 }
 
 type Team struct {
@@ -54,13 +55,15 @@ type Game struct {
 }
 
 type GameTeam struct {
-	ID     primitive.ObjectID `bson:"team_id" json:"team_id"`
-	Side   string             `bson:"side" json:"side"`
-	Winner bool               `bson:"winner,omitempty" json:"winner"`
+	ID   primitive.ObjectID `bson:"team_id" json:"team_id"`
+	Side string             `bson:"side" json:"side"`
 
 	// fallback fields to teams collection
 	ExternalID string `bson:"-" json:"external_id"`
 	Name       string `bson:"-" json:"name"`
+
+	// TODO: winner already on GameTeam, so on front end i dont need to check both
+	// Winner bool `bson:"winner,omitempty" json:"winner"`
 }
 
 type GamePlayer struct {

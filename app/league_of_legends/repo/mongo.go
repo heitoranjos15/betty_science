@@ -21,18 +21,30 @@ func NewMongoRepo(collectionName string, db *mongo.Database) *MongoRepo {
 }
 
 func (r *MongoRepo) SaveBulkMatches(ctx context.Context, matches []models.Match) error {
-	var models []mongo.WriteModel
+	var mongoModels []mongo.WriteModel
 
 	for _, match := range matches {
+		cursor := r.collection.FindOne(ctx, bson.M{"external_id": match.ExternalID})
+		var matchSaved models.Match
+		err := cursor.Decode(&matchSaved)
+		if err == nil && matchSaved.LoadState != "without_games" {
+			continue
+		}
+
 		filter := bson.M{"external_id": match.ExternalID}
 		update := bson.M{"$set": match}
 		model := mongo.NewUpdateOneModel().
 			SetFilter(filter).
 			SetUpdate(update).
 			SetUpsert(true)
-		models = append(models, model)
+		mongoModels = append(mongoModels, model)
 	}
-	_, err := r.collection.BulkWrite(ctx, models)
+
+	if len(mongoModels) == 0 {
+		return nil
+	}
+
+	_, err := r.collection.BulkWrite(ctx, mongoModels)
 	if err != nil {
 		return err
 	}

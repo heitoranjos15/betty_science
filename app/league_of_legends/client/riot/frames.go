@@ -1,11 +1,12 @@
 package riot
 
 import (
-	"betty/science/app/league_of_legends/client"
-	"betty/science/app/league_of_legends/models"
 	"errors"
 	"log"
 	"time"
+
+	"betty/science/app/league_of_legends/client"
+	"betty/science/app/league_of_legends/models"
 )
 
 var ErrorGameFrameNoContent = errors.New("game frame has no content")
@@ -27,6 +28,7 @@ func (c *clientFrame) LoadData(game models.Game) (client.FrameResponse, error) {
 	now := time.Now().UTC().Add(-2 * time.Minute)
 	gameFrames, err := c.api.GetFrames(game.ExternalID, now)
 	if err != nil {
+		log.Println("[client-team-frame] Error fetching game frames for game:", game.ExternalID, err)
 		return frames, err
 	}
 

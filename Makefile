@@ -32,6 +32,9 @@ run:
 load_frames:
 	$(GO) run cmd/bot/riot.go load_frames
 
+load_games:
+	$(GO) run cmd/bot/riot.go load_games
+
 .PHONY: schedule
 schedule:
 	$(GO) run cmd/bot/riot.go CMD=schedule
