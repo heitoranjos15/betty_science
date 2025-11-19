@@ -37,7 +37,13 @@ load_games:
 
 .PHONY: schedule
 schedule:
-	$(GO) run cmd/bot/riot.go CMD=schedule
+	$(GO) run cmd/league_of_legends/command.go CMD=schedule
+
+game:
+	$(GO) run cmd/league_of_legends/command.go CMD=game
+
+frame:
+	$(GO) run cmd/league_of_legends/command.go CMD=frame
 
 .PHONY: update_matches
 update_matches:

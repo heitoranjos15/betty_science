@@ -497,7 +497,7 @@ func TestLoadFrames(t *testing.T) {
 			if tt.mock != nil {
 				tt.mock(mockClient)
 			}
-			clientFrame := client.NewTeamFramesClient(mockClient)
+			clientFrame := client.NewFramesClient(mockClient)
 
 			frames, err := clientFrame.LoadData(tt.game)
 			if (err != nil) != tt.wantErr {

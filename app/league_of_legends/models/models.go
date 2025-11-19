@@ -6,120 +6,150 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+type TournamentTeam struct {
+	TournamentName string
+	Team           Team
+}
+
+type MatchResponse struct {
+	Match        []Match
+	TeamsDetails []TournamentTeam
+}
+
 type Match struct {
-	ID         primitive.ObjectID   `bson:"_id,omitempty" json:"id"`
-	StartTime  time.Time            `bson:"start_time" json:"start_time"`
-	State      string               `bson:"state" json:"state"`
-	BestOf     int                  `bson:"best_of" json:"best_of"`
-	Format     string               `bson:"format" json:"format"`
-	League     string               `bson:"league" json:"league"`
-	ExternalID string               `bson:"external_id" json:"external_id"`
-	LoadState  string               `bson:"load_state" json:"load_state"`
-	TeamsID    []primitive.ObjectID `bson:"teams_id" json:"teams_id"`
+	ID         primitive.ObjectID
+	StartTime  time.Time
+	State      string
+	BestOf     int
+	Format     string
+	League     string
+	Tournament string
+	ExternalID string
+	LoadState  string
+	TeamsID    []primitive.ObjectID
 }
 
 type Team struct {
-	ID          primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	ExternalID  string             `bson:"external_id" json:"external_id"`
-	Name        string             `bson:"name" json:"name"`
-	Code        string             `bson:"code" json:"code"`
-	ImageURL    string             `bson:"image" json:"image"`
-	Tournaments []string           `bson:"tournaments" json:"tournaments"`
+	ID          primitive.ObjectID
+	ExternalID  string
+	Name        string
+	Code        string
+	ImageURL    string
+	Tournaments []string
 }
 
 type Player struct {
-	ID         primitive.ObjectID   `bson:"_id,omitempty" json:"id"`
-	ExternalID string               `bson:"external_id" json:"external_id"`
-	Name       string               `bson:"name" json:"name"`
-	ActualTeam primitive.ObjectID   `bson:"actual_team" json:"actual_team"`
-	ActualRole string               `bson:"actual_role" json:"actual_role"`
-	Roles      []string             `bson:"roles" json:"roles"`
-	Teams      []primitive.ObjectID `bson:"teams" json:"teams"`
-	ImageURL   string               `bson:"image" json:"image"`
+	ID         primitive.ObjectID
+	ExternalID string
+	Name       string
+	ActualTeam primitive.ObjectID
+	ActualRole string
+	Roles      []string
+	Teams      []primitive.ObjectID
+	ImageURL   string
 }
 
 type Game struct {
-	ID           primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	MatchID      primitive.ObjectID `bson:"match_id" json:"match_id"`
-	ExternalID   string             `bson:"external_id" json:"external_id"`
-	Number       int                `bson:"game_number" json:"game_number"`
-	Winner       primitive.ObjectID `bson:"winner,omitempty" json:"winner"`
-	Duration     float64            `bson:"duration,omitempty" json:"duration"` // in seconds
-	ScheduleTime time.Time          `bson:"schedule_time,omitempty" json:"start_time,omitempty"`
-	StartTime    time.Time          `bson:"start_time,omitempty" json:"actual_start_time,omitempty"`
-	Teams        []GameTeam         `bson:"teams,omitempty" json:"teams"`
-	Players      []GamePlayer       `bson:"players,omitempty" json:"players"`
-	State        string             `bson:"state" json:"state"` // unloaded, loaded, error
-	LoadState    string             `bson:"load_state" json:"load_state"`
-	ErrorMsg     string             `bson:"error_message,omitempty" json:"error_message,omitempty"`
+	ID           primitive.ObjectID
+	MatchID      primitive.ObjectID
+	ExternalID   string
+	Number       int
+	Winner       primitive.ObjectID
+	Duration     float64
+	ScheduleTime time.Time
+	StartTime    time.Time
+	Teams        []GameTeam
+	Players      []GamePlayer
+	State        string
+	LoadState    string
+	ErrorMsg     string
 }
 
 type GameTeam struct {
-	ID   primitive.ObjectID `bson:"team_id" json:"team_id"`
-	Side string             `bson:"side" json:"side"`
+	ID   primitive.ObjectID
+	Side string
 
 	// fallback fields to teams collection
-	ExternalID string `bson:"-" json:"external_id"`
-	Name       string `bson:"-" json:"name"`
+	ExternalID string
+	Name       string
 
 	// TODO: winner already on GameTeam, so on front end i dont need to check both
-	// Winner bool `bson:"winner,omitempty" json:"winner"`
+	// Winner bool
 }
 
 type GamePlayer struct {
-	PlayerID primitive.ObjectID `bson:"player_id" json:"player_id"`
-	Side     string             `bson:"side" json:"side"`
-	Champion string             `bson:"champion" json:"champion"`
-	Role     string             `bson:"role" json:"role"`
+	PlayerID primitive.ObjectID
+	Side     string
+	Champion string
+	Role     string
+}
+
+type PlayerGameInfo struct {
+	PlayerID   primitive.ObjectID
+	ExternalID string
+	Name       string
+	Team       string
+	Role       string
+	Side       string
+	Champion   string
+	TeamID     primitive.ObjectID
+}
+
+type FrameResponse struct {
+	Frames    []Frame
+	Players   []PlayerGameInfo
+	GameStart time.Time
+	GameEnd   time.Time
+	WinnerID  primitive.ObjectID
 }
 
 type Frame struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	GameID    primitive.ObjectID `bson:"game_id" json:"game_id"`
-	Teams     []FrameTeam        `bson:"teams" json:"teams"`
-	Players   []FramePlayer      `bson:"players" json:"players"`
-	Time      int                `bson:"time" json:"time"` // in seconds
-	TimeStamp time.Time          `bson:"timestamp" json:"timestamp"`
+	ID        primitive.ObjectID
+	GameID    primitive.ObjectID
+	Teams     []FrameTeam
+	Players   []FramePlayer
+	Time      int
+	TimeStamp time.Time
 }
 
 type FrameTeam struct {
-	TeamID     primitive.ObjectID `bson:"team_id" json:"team_id"`
-	Gold       int                `bson:"gold" json:"totalGold"`
-	Towers     int                `bson:"towers" json:"towers"`
-	Dragons    []string           `bson:"dragons" json:"dragons"`
-	Barons     int                `bson:"barons" json:"barons"`
-	Inhibitors int                `bson:"inhibitors" json:"inhibitors"`
-	TotalKills int                `bson:"total_kills" json:"totalKills"`
+	TeamID     primitive.ObjectID
+	Gold       int
+	Towers     int
+	Dragons    []string
+	Barons     int
+	Inhibitors int
+	TotalKills int
 }
 
 type FramePlayer struct {
-	PlayerID            primitive.ObjectID `bson:"player_id" json:"player_id"`
-	ExternalID          string             `bson:"external_id" json:"external_id"`
-	Level               int                `bson:"level" json:"level"`
-	Kills               int                `bson:"kills" json:"kills"`
-	Deaths              int                `bson:"deaths" json:"deaths"`
-	Assists             int                `bson:"assists" json:"assists"`
-	TotalGoldEarned     int                `bson:"total_gold_earned" json:"totalGoldEarned"`
-	CreepScore          int                `bson:"creep_score" json:"creepScore"`
-	KillParticipation   float64            `bson:"kill_participation" json:"killParticipation"`
-	ChampionDamageShare float64            `bson:"champion_damage_share" json:"championDamageShare"`
-	WardsPlaced         int                `bson:"wards_placed" json:"wardsPlaced"`
-	WardsDestroyed      int                `bson:"wards_destroyed" json:"wardsDestroyed"`
-	AttackDamage        int                `bson:"attack_damage" json:"attackDamage"`
-	AbilityPower        int                `bson:"ability_power" json:"abilityPower"`
-	CriticalChance      float64            `bson:"critical_chance" json:"criticalChance"`
-	AttackSpeed         int                `bson:"attack_speed" json:"attackSpeed"`
-	LifeSteal           int                `bson:"life_steal" json:"lifeSteal"`
-	Armor               int                `bson:"armor" json:"armor"`
-	MagicResistance     int                `bson:"magic_resistance" json:"magicResistance"`
-	Tenacity            float64            `bson:"tenacity" json:"tenacity"`
-	Items               []int              `bson:"items" json:"items"`
-	Runes               Runes              `bson:"runes" json:"runes"`
-	Abilities           []string           `bson:"abilities" json:"abilities"`
+	PlayerID            primitive.ObjectID
+	ExternalID          string
+	Level               int
+	Kills               int
+	Deaths              int
+	Assists             int
+	TotalGoldEarned     int
+	CreepScore          int
+	KillParticipation   float64
+	ChampionDamageShare float64
+	WardsPlaced         int
+	WardsDestroyed      int
+	AttackDamage        int
+	AbilityPower        int
+	CriticalChance      float64
+	AttackSpeed         int
+	LifeSteal           int
+	Armor               int
+	MagicResistance     int
+	Tenacity            float64
+	Items               []int
+	Runes               Runes
+	Abilities           []string
 }
 
 type Runes struct {
-	Main      int   `bson:"main" json:"main"`
-	Secondary int   `bson:"secondary" json:"secondary"`
-	Perks     []int `bson:"perks" json:"perks"`
+	Main      int
+	Secondary int
+	Perks     []int
 }

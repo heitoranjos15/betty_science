@@ -33,8 +33,6 @@ func (c *gameClient) LoadData(match models.Match) ([]models.Game, error) {
 		if details.Number == 1 {
 			game.ScheduleTime = match.StartTime
 		}
-		game.LoadState = "without_frames"
-
 		response = append(response, game)
 	}
 

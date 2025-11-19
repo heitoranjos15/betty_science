@@ -1,7 +1,6 @@
 package riot
 
 import (
-	"betty/science/app/league_of_legends/client"
 	"betty/science/app/league_of_legends/models"
 	"errors"
 	"fmt"
@@ -9,18 +8,22 @@ import (
 	"time"
 )
 
-type clientMatch struct {
+type ClientMatch struct {
 	api api
 }
 
-func NewClientMatch(api api) *clientMatch {
-	return &clientMatch{
+func NewClientMatch(api api) *ClientMatch {
+	return &ClientMatch{
 		api: api,
 	}
 }
 
-func (c *clientMatch) LoadData(_ any) (client.MatchResponse, error) {
-	var response client.MatchResponse
+func (c *ClientMatch) Load() (models.MatchResponse, error) {
+	return c.LoadData(nil)
+}
+
+func (c *ClientMatch) LoadData(_ any) (models.MatchResponse, error) {
+	var response models.MatchResponse
 	data, err := c.api.GetSchedule()
 	if err != nil {
 		log.Println("[client-riot] Error fetching schedule:", err)
@@ -50,7 +53,7 @@ func (c *clientMatch) LoadData(_ any) (client.MatchResponse, error) {
 	return response, nil
 }
 
-func (c clientMatch) validateEvent(event Event) error {
+func (c ClientMatch) validateEvent(event Event) error {
 	for _, team := range event.Match.Teams {
 		if team.Name == "" || team.Name == "TBD" {
 			return errors.New("invalid team name")
@@ -60,7 +63,7 @@ func (c clientMatch) validateEvent(event Event) error {
 	return nil
 }
 
-func (c clientMatch) match(event Event) (models.Match, error) {
+func (c ClientMatch) match(event Event) (models.Match, error) {
 	timeParsed, err := time.Parse(time.RFC3339, event.StartTime)
 	if err != nil {
 		return models.Match{}, errors.New("invalid start time format")
@@ -77,10 +80,10 @@ func (c clientMatch) match(event Event) (models.Match, error) {
 	}, nil
 }
 
-func (c clientMatch) team(event Event) ([]client.TeamDetails, error) {
-	teams := []client.TeamDetails{}
+func (c ClientMatch) team(event Event) ([]models.TournamentTeam, error) {
+	teams := []models.TournamentTeam{}
 	for _, team := range event.Match.Teams {
-		teams = append(teams, client.TeamDetails{
+		teams = append(teams, models.TournamentTeam{
 			TournamentName: fmt.Sprintf("%s %d", event.League.Name, time.Now().Year()),
 			Team: models.Team{
 				Name:     team.Name,

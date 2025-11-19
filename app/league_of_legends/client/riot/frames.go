@@ -3,9 +3,10 @@ package riot
 import (
 	"errors"
 	"log"
+	"sort"
+	"sync"
 	"time"
 
-	"betty/science/app/league_of_legends/client"
 	"betty/science/app/league_of_legends/models"
 )
 
@@ -21,8 +22,71 @@ func NewFramesClient(api api) *clientFrame {
 	}
 }
 
-func (c *clientFrame) LoadData(game models.Game) (client.FrameResponse, error) {
-	var frames client.FrameResponse
+func (c *clientFrame) collectFrames(frames []GameFrame, gameExternalID string) ([]GameFrame, error) {
+	endGameFrame := frames[len(frames)-1]
+
+	endTime, err := time.Parse(time.RFC3339, endGameFrame.Rfc460Timestamp)
+	if err != nil {
+		return frames, err
+	}
+
+	timeCounter := 0
+	lastFrame := false
+	for !lastFrame {
+		type chanResult struct {
+			LastFrame bool
+			Frames    []GameFrame
+		}
+		channel := make(chan chanResult, 3)
+		wg := sync.WaitGroup{}
+
+		for range make([]int, 3) {
+			wg.Add(1)
+			timeCounter++
+			go func(channel chan<- chanResult, timeCounter int, startTime time.Time) {
+				defer wg.Done()
+				frameTime := startTime.Add(time.Duration(-timeCounter) * time.Minute)
+				log.Println("[client-team-frame] Fetching remaining frames for game:", gameExternalID, "at", frameTime)
+				frames, err := c.api.GetFrames(gameExternalID, frameTime)
+				if err != nil {
+					if errors.Is(err, ErrorGameFrameNoContent) {
+						log.Println("[client-team-frame] No more frames available for game:", gameExternalID)
+						lastFrame = true
+						return
+					}
+				}
+
+				channel <- chanResult{
+					LastFrame: false,
+					Frames:    frames.Frames,
+				}
+			}(channel, timeCounter, endTime)
+		}
+
+		wg.Wait()
+		close(channel)
+		time.Sleep(1 * time.Second) // to avoid rate limiting
+
+		for result := range channel {
+			frames = append(frames, result.Frames...)
+		}
+
+		if lastFrame {
+			log.Println("[client-team-frame] Completed fetching all frames for game:", gameExternalID)
+			break
+		}
+	}
+
+	sort.SliceStable(frames, func(i, j int) bool {
+		timeI, _ := time.Parse(time.RFC3339, frames[i].Rfc460Timestamp)
+		timeJ, _ := time.Parse(time.RFC3339, frames[j].Rfc460Timestamp)
+		return timeI.Before(timeJ)
+	})
+	return frames, nil
+}
+
+func (c *clientFrame) LoadData(game models.Game) (models.FrameResponse, error) {
+	var frames models.FrameResponse
 	log.Println("[client-team-frame] Loading frames for game:", game.ExternalID)
 
 	now := time.Now().UTC().Add(-2 * time.Minute)
@@ -33,9 +97,19 @@ func (c *clientFrame) LoadData(game models.Game) (client.FrameResponse, error) {
 	}
 
 	frame := gameFrames.Frames[len(gameFrames.Frames)-1]
-	frames.GameStart, frames.GameEnd = c.findGameStartAndEnd(game, frame)
+	allFrames, err := c.collectFrames(gameFrames.Frames, game.ExternalID)
+	if err != nil {
+		return frames, err
+	}
 
-	playerFrames, err := c.api.GetPlayerFrames(game.ExternalID, now)
+	gameFrames.Frames = allFrames
+
+	firstFrameTime, _ := time.Parse(time.RFC3339, gameFrames.Frames[0].Rfc460Timestamp)
+	lastFrameTime, _ := time.Parse(time.RFC3339, gameFrames.Frames[len(gameFrames.Frames)-1].Rfc460Timestamp)
+	frames.GameStart = firstFrameTime
+	frames.GameEnd = lastFrameTime
+
+	playerFrames, err := c.api.GetPlayerFrames(game.ExternalID, lastFrameTime)
 	if err != nil {
 		return frames, err
 	}
@@ -53,57 +127,18 @@ func (c *clientFrame) LoadData(game models.Game) (client.FrameResponse, error) {
 	}
 	frames.WinnerID = winner.TeamID
 
-	frames.Frame = models.Frame{
-		GameID:    game.ID,
-		TimeStamp: timestamp,
-		Teams:     teams,
-		Players:   c.framePlayers(game.Teams, gameFrames.GameMetadata, playerFrame),
+	frames.Frames = []models.Frame{
+		{
+			GameID:    game.ID,
+			TimeStamp: timestamp,
+			Teams:     teams,
+			Players:   c.framePlayers(game.Teams, gameFrames.GameMetadata, playerFrame),
+		},
 	}
 
 	frames.Players = c.playersDetails(game.Teams, gameFrames.GameMetadata)
 
 	return frames, nil
-}
-
-func (c *clientFrame) findGameStartAndEnd(game models.Game, frame GameFrame) (time.Time, time.Time) {
-	gameEnd := time.Time{}
-	gameStart := game.StartTime
-
-	timestamp, _ := time.Parse(time.RFC3339, frame.Rfc460Timestamp)
-	gameEnd = timestamp
-
-	if game.StartTime.IsZero() {
-		gameStart = c.gameStart(game.ExternalID, timestamp)
-		return gameStart, gameEnd
-	}
-
-	return gameStart, gameEnd
-}
-
-func (c clientFrame) gameStart(gameExternalID string, endGameTime time.Time) time.Time {
-	pastTime := endGameTime.Add(-20 * time.Minute) // assuming average game duration of 20 minutes
-	startTime := pastTime
-
-	for {
-		log.Println("[client-team-frame] Fetching first frame for game:", gameExternalID, "at", pastTime)
-		firstFrame, err := c.api.GetFrames(gameExternalID, pastTime)
-		if err != nil {
-			if errors.Is(err, ErrorGameFrameNoContent) {
-				log.Println("[client-team-frame] Game start time found for game:", gameExternalID, "at", startTime)
-				break
-			}
-
-			log.Println("[client-team-frame] Error fetching first frame for game:", gameExternalID, err)
-			break
-		}
-
-		time.Sleep(1 * time.Second) // to avoid rate limiting
-
-		pastTime = pastTime.Add(-1 * time.Minute)
-		startTime, _ = time.Parse(time.RFC3339, firstFrame.Frames[0].Rfc460Timestamp)
-	}
-
-	return startTime
 }
 
 func (c clientFrame) framePlayers(teams []models.GameTeam, gameMetadata GameMetadata, playerFrame ParticipantFrame) []models.FramePlayer {
@@ -166,13 +201,13 @@ func (c clientFrame) frameTeams(teams []models.GameTeam, gameMetadata GameFrame)
 	return frame
 }
 
-func (c clientFrame) playersDetails(team []models.GameTeam, gameMetadata GameMetadata) []client.PlayerFrame {
-	var players []client.PlayerFrame
+func (c clientFrame) playersDetails(team []models.GameTeam, gameMetadata GameMetadata) []models.PlayerGameInfo {
+	var players []models.PlayerGameInfo
 
 	for _, team := range team {
 		teamMeta := c.findParticipantMetadata(team.Side, gameMetadata)
 		for _, player := range teamMeta {
-			players = append(players, client.PlayerFrame{
+			players = append(players, models.PlayerGameInfo{
 				ExternalID: player.EsportsPlayerID,
 				Role:       player.Role,
 				Name:       player.SummonerName,

@@ -12,14 +12,14 @@ type Config struct {
 	Workers    int    `mapstructure:"WORKERS"`
 }
 
-func LoadConfig() *Config {
+func LoadConfig() Config {
 	viper.AddConfigPath("./config")
 	err := viper.ReadInConfig()
 	if err != nil {
 		panic(err)
 	}
 
-	return &Config{
+	return Config{
 		RiotAPIKey: viper.GetString("RIOT_API_KEY"),
 		RiotSleep:  viper.GetInt("RIOT_SLEEP"),
 		MongoURI:   viper.GetString("MONGO_URI"),

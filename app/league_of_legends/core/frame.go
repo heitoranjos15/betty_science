@@ -3,23 +3,19 @@ package core
 import (
 	"context"
 	"log"
-	"slices"
-	"time"
 
-	"betty/science/app/league_of_legends/client"
 	"betty/science/app/league_of_legends/models"
-	"betty/science/config"
+	"betty/science/app/league_of_legends/repo"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type frameClient interface {
-	LoadData(game models.Game) (client.FrameResponse, error)
+	LoadData(game models.Game) (models.FrameResponse, error)
 }
 
 type FrameChannel struct {
-	frame client.FrameResponse
+	frame models.FrameResponse
 	g     models.Game
 	err   error
 }
@@ -40,6 +36,38 @@ func NewFrameCore(client frameClient, db frameDB, gameDB gameDB, playersDB playe
 	}
 }
 
+func (ec *FrameCore) LoadBulk() ([]models.Game, error) {
+	ctx := context.Background()
+
+	games, err := ec.gameDB.GetGames(ctx, bson.M{
+		"load_state": "without_frames",
+	})
+	if err != nil {
+		log.Println("[core-frame] Error fetching games:", err)
+		return nil, err
+	}
+
+	gamesData := []models.Game{}
+	for _, g := range games {
+		teams := []models.GameTeam{}
+		for _, gt := range g.Teams {
+			teams = append(teams, models.GameTeam{
+				ID: gt.ID,
+			})
+		}
+
+		game := models.Game{
+			ID:         g.ID,
+			ExternalID: g.ExternalID,
+			Teams:      teams,
+		}
+
+		gamesData = append(gamesData, game)
+	}
+
+	return gamesData, nil
+}
+
 func (ec *FrameCore) Load() error {
 	ctx := context.Background()
 
@@ -56,141 +84,71 @@ func (ec *FrameCore) Load() error {
 		return err
 	}
 
-	botCfg := config.SetupBot()
-	bots := botCfg.Bots
-	frameChan := make(chan FrameChannel)
-
-	limitBots := len(games)
-	if limitBots >= botCfg.Workers {
-		limitBots = limitBots / botCfg.Workers
-	}
-
-	for i := 0; i < botCfg.Workers; i++ {
-		bot := bots[i]
-		log.Printf("[%s] hey", bot.Name)
-		if i*limitBots >= len(games) {
-			log.Printf("[%s] i dont need to work", bot.Name)
-		}
-
-		loadGames := games[i*limitBots : (i+1)*limitBots]
-		go ec.loadGamesWorker(bot, loadGames, frameChan)
-	}
-
-	ec.processLoadedFrames(ctx, frameChan)
-
 	log.Printf("[core-frame] loaded frames for %d games", len(games))
 
 	return nil
 }
 
-func (ec *FrameCore) processLoadedFrames(ctx context.Context, frameChan <-chan FrameChannel) {
-	for frameResp := range frameChan {
-		ec.saveGame(ctx, frameResp)
-		ec.savePlayers(ctx, frameResp)
-		ec.saveFrames(ctx, frameResp)
-	}
+func (ec *FrameCore) Save(game models.Game, frame models.Frame) error {
+	ctx := context.Background()
 
-}
-
-func (ec *FrameCore) saveGame(ctx context.Context, chanResp FrameChannel) {
-	log.Printf("[core-frame] Saving game data for game %s", chanResp.g.ExternalID)
-	game := chanResp.g
-	frame := chanResp.frame
-	if chanResp.err != nil {
-		log.Printf("[core-frame] Error loading frames for game %s: %v", game.ExternalID, chanResp.err)
-	}
-	game.StartTime = frame.GameStart
-	game.Duration = frame.GameEnd.Sub(chanResp.frame.GameStart).Seconds()
-	game.Winner = frame.WinnerID
-	game.LoadState = "loaded"
-
-	players := ec.getPlayersData(frame.Players) // TODO: method that injects PlayerID
-	gamePlayers := []models.GamePlayer{}
-	for i, p := range frame.Players {
-		gamePlayers = append(gamePlayers, models.GamePlayer{
-			PlayerID: players[i].ID,
-			Role:     p.Role,
-			Champion: p.Champion,
-			Side:     p.Side,
+	teams := []repo.FrameTeam{}
+	for _, t := range frame.Teams {
+		teams = append(teams, repo.FrameTeam{
+			TeamID:     t.TeamID,
+			Gold:       t.Gold,
+			Towers:     t.Towers,
+			Inhibitors: t.Inhibitors,
+			Dragons:    t.Dragons,
+			Barons:     t.Barons,
+			TotalKills: t.TotalKills,
 		})
 	}
-	game.Players = gamePlayers
+	players := []repo.FramePlayer{}
+	for _, p := range frame.Players {
+		players = append(players, repo.FramePlayer{
+			PlayerID:            p.PlayerID,
+			ExternalID:          p.ExternalID,
+			Level:               p.Level,
+			Kills:               p.Kills,
+			Deaths:              p.Deaths,
+			Assists:             p.Assists,
+			TotalGoldEarned:     p.TotalGoldEarned,
+			CreepScore:          p.CreepScore,
+			KillParticipation:   p.KillParticipation,
+			ChampionDamageShare: p.ChampionDamageShare,
+			WardsPlaced:         p.WardsPlaced,
+			WardsDestroyed:      p.WardsDestroyed,
+			AttackDamage:        p.AttackDamage,
+			AbilityPower:        p.AbilityPower,
+			CriticalChance:      p.CriticalChance,
+			AttackSpeed:         p.AttackSpeed,
+			LifeSteal:           p.LifeSteal,
+			Armor:               p.Armor,
+			MagicResistance:     p.MagicResistance,
+			Tenacity:            p.Tenacity,
+			Items:               p.Items,
+			Runes: repo.Runes{
+				Main:      p.Runes.Main,
+				Secondary: p.Runes.Secondary,
+				Perks:     p.Runes.Perks,
+			},
+			Abilities: p.Abilities,
+		})
+	}
 
-	err := ec.gameDB.SaveGame(ctx, game)
+	frameData := repo.Frame{
+		GameID:    game.ID,
+		TimeStamp: frame.TimeStamp,
+		Teams:     teams,
+		Players:   players,
+		Time:      frame.Time,
+	}
+	err := ec.db.SaveFrame(ctx, frameData)
 	if err != nil {
-		log.Printf("[core-frame] Error updating game %s: %v", game.ExternalID, err)
+		log.Printf("[core-frame] Error saving frame for game %s: %v", frame.GameID.Hex(), err)
 	}
 
-}
-
-func (ec *FrameCore) savePlayers(ctx context.Context, chanResp FrameChannel) {
-	log.Printf("[core-frame] Saving players data for game %s", chanResp.g.ExternalID)
-	frame := chanResp.frame
-	players := ec.getPlayersData(frame.Players) // TODO: method that injects PlayerID
-	game := chanResp.g
-	if err := ec.playersDB.SaveBulkPlayers(ctx, players); err != nil {
-		log.Printf("[core-frame] Error saving players for game %s: %v", game.ExternalID, err)
-	}
-}
-
-func (ec *FrameCore) saveFrames(ctx context.Context, chanResp FrameChannel) {
-	log.Printf("[core-frame] Saving frames data for game %s", chanResp.g.ExternalID)
-	frame := chanResp.frame
-	players := ec.getPlayersData(frame.Players) // TODO: method that injects PlayerID
-	for i, pData := range players {
-		frame.Frame.Players[i].PlayerID = pData.ID
-	}
-
-	game := chanResp.g
-	err := ec.db.SaveFrame(ctx, frame.Frame)
-	if err != nil {
-		log.Printf("[core-frame] Error saving frame for game %s: %v", game.ExternalID, err)
-	}
-}
-
-func (ec *FrameCore) loadGamesWorker(bot *config.Bot, games []models.Game, outChan chan<- FrameChannel) {
-	defer close(outChan)
-	log.Printf("[%s] loading frames for %d games", bot.Name, len(games))
-
-	for _, game := range games {
-		frame, err := ec.client.LoadData(game)
-
-		outChan <- FrameChannel{frame: frame, g: game, err: err}
-
-		log.Printf("[%s] loaded frames for game %s", bot.Name, game.ExternalID)
-		time.Sleep(time.Duration(bot.DelaySeconds) * time.Second) // to avoid rate limiting
-	}
-}
-
-func (ec *FrameCore) getPlayersData(playerFrame []client.PlayerFrame) []models.Player {
-	var players []models.Player
-
-	for _, pf := range playerFrame {
-		existPlayer, err := ec.playersDB.GetPlayerByExternalID(context.Background(), pf.ExternalID)
-		if err != nil {
-			log.Printf("[core-frame] Player with external ID %s not found, creating new one", pf.ExternalID)
-			player := models.Player{
-				ExternalID: pf.ExternalID,
-				Name:       pf.Name,
-				Roles:      []string{pf.Role},
-				Teams:      []primitive.ObjectID{pf.TeamID},
-				ActualRole: pf.Role,
-				ActualTeam: pf.TeamID,
-			}
-			players = append(players, player)
-			continue
-		}
-
-		if len(existPlayer.Roles) == 0 || !slices.Contains(existPlayer.Roles, pf.Role) {
-			existPlayer.ActualRole = pf.Role
-			existPlayer.Roles = append(existPlayer.Roles, pf.Role)
-		}
-		if len(existPlayer.Teams) == 0 || !slices.Contains(existPlayer.Teams, pf.TeamID) {
-			existPlayer.ActualTeam = pf.TeamID
-			existPlayer.Teams = append(existPlayer.Teams, pf.TeamID)
-		}
-		players = append(players, existPlayer)
-
-	}
-	return players
+	log.Printf("[core-frame] Saved frame at %v for game %s", frame.TimeStamp, game.ExternalID)
+	return nil
 }
