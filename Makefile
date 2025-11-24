@@ -28,22 +28,14 @@ run:
 	$(GO) run main.go
 
 # Run the bot located in cmd/bot/riot.go
-.PHONY: load_frames
-load_frames:
-	$(GO) run cmd/bot/riot.go load_frames
-
-load_games:
-	$(GO) run cmd/bot/riot.go load_games
-
-.PHONY: schedule
 schedule:
-	$(GO) run cmd/league_of_legends/command.go CMD=schedule
+	$(GO) run cmd/riot/command.go CMD=schedule
 
 game:
-	$(GO) run cmd/league_of_legends/command.go CMD=game
+	$(GO) run cmd/riot/command.go CMD=game
 
 frame:
-	$(GO) run cmd/league_of_legends/command.go CMD=frame
+	$(GO) run cmd/riot/command.go CMD=frame
 
 .PHONY: update_matches
 update_matches:

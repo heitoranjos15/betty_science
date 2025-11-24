@@ -1,5 +1,7 @@
 package channels
 
+// TODO: BETTER MANAGE OF THIS CHANNELS
+
 type BotResponse struct {
 	Error          error
 	TotalProcessed int
